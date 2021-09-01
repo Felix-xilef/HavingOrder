@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HavingOrder</string>
+    <string name="askEmail">Qual o seu e-mail?</string>
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
     <string name="login">Entrar</string>
+    <string name="signup">Cadastrar</string>
+    <string name="signupSuccess">Usuário cadastrado com sucesso!</string>
+    <string name="signinSuccess">Login efetuado com sucesso!</string>
+    <string name="signinFailure">E-mail ou senha incorreto(s)!</string>
+    <string name="emptyFields">Um ou mais campos não preenchidos!</string>
 </resources>
