@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">HavingOrder</string>
     <string name="login">Entrar</string>
+    <string name="filter">Filtro</string>
 </resources>
