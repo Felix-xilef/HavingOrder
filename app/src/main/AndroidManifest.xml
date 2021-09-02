@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HavingOrder">
         <activity
+            android:name=".SignInActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Orders"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

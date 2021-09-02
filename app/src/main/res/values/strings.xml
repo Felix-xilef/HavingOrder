@@ -1,4 +1,15 @@
 <resources>
-    <string name="app_name">HavingOrder</string>
+    <string name="app_name" translatable="false">HavingOrder</string>
+    <string name="havingorder_logo" translatable="false">HavingOrder logo</string>
+    <string name="askEmail">What\'s your e-mail?</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="filter">Filter</string>
+    <string name="signup">Singup</string>
+    <string name="signupSuccess">User signed up successfully!</string>
+    <string name="signinSuccess">Signed in successfully!</string>
+    <string name="signinFailure">Wrong email or password!</string>
+    <string name="emptyFields">One or more fields are empty!</string>
+    <string name="logoDescription">App Logo</string>
 </resources>
