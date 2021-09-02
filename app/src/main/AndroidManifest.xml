@@ -10,7 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HavingOrder">
         <activity
+<<<<<<< HEAD
             android:name=".Orders"
+=======
+            android:name=".SignInActivity"
+>>>>>>> create_login_screen
             android:exported="true" />
         <activity
             android:name=".MainActivity"
