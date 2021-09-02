@@ -5,13 +5,11 @@
     <string name="email">E-mail</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-<<<<<<< HEAD
     <string name="filter">Filter</string>
-=======
     <string name="signup">Singup</string>
     <string name="signupSuccess">User signed up successfully!</string>
     <string name="signinSuccess">Signed in successfully!</string>
     <string name="signinFailure">Wrong email or password!</string>
     <string name="emptyFields">One or more fields are empty!</string>
->>>>>>> create_login_screen
+    <string name="logoDescription">App Logo</string>
 </resources>

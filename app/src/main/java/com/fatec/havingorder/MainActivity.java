@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToLogin() {
-        Intent intent = new Intent(this, Orders.class);
+        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
         finish();
     }
