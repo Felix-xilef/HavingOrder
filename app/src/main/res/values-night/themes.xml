@@ -15,5 +15,13 @@
         <item name="android:colorBackground">@color/background</item>
         <item name="android:textColor">@color/foreground</item>
         <item name="android:textColorHint">@color/foreground_dark</item>
+        <item name="actionOverflowButtonStyle">@style/ActionbarMenuStyle</item>
+    </style>
+
+    <style name="ActionbarMenuStyle" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_baseline_menu_24</item>
+        <item name="android:background">?android:attr/actionBarItemBackground</item>
+        <item name="android:contentDescription">@string/actionbarMenu</item>
+        <item name="layout_constraintEnd_toStartOf">parent</item>
     </style>
 </resources>
