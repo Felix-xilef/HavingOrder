@@ -8,8 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="foregroundColor">#F2F2F2</color>
-    <color name="backgroundColor">#353535</color>
+    <color name="foreground">#F2F2F2</color>
+    <color name="foreground_dark">#CACACA</color>
+    <color name="background">#353535</color>
     <color name="light_blue">#3C8BE6</color>
     <color name="light_red">#F04030</color>
     <color name="orange">#FB9927</color>

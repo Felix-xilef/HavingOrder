@@ -11,4 +11,8 @@
     <string name="signinFailure">E-mail ou senha incorreto(s)!</string>
     <string name="emptyFields">Um ou mais campos não preenchidos!</string>
     <string name="logoDescription">Logo do Aplicativo</string>
+    <string name="btnOrders">Ordens</string>
+    <string name="btnUsers">Usuários / Clientes</string>
+    <string name="btnLogout">Sair</string>
+    <string name="actionbarMenu">Menu</string>
 </resources>

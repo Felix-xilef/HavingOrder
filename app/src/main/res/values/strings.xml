@@ -12,4 +12,8 @@
     <string name="signinFailure">Wrong email or password!</string>
     <string name="emptyFields">One or more fields are empty!</string>
     <string name="logoDescription">App Logo</string>
+    <string name="btnOrders">Orders</string>
+    <string name="btnUsers">Users / Clients</string>
+    <string name="btnLogout">Logout</string>
+    <string name="actionbarMenu">Menu</string>
 </resources>

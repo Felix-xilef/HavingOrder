@@ -4,14 +4,20 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/light_blue</item>
         <item name="colorPrimaryVariant">@color/light_blue</item>
-        <item name="colorOnPrimary">@color/foregroundColor</item>
+        <item name="colorOnPrimary">@color/foreground</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_red</item>
-        <item name="colorSecondaryVariant">@color/light_red</item>
-        <item name="colorOnSecondary">@color/foregroundColor</item>
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorSecondaryVariant">@color/orange</item>
+        <item name="colorOnSecondary">@color/foreground</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:colorBackground">@color/backgroundColor</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:textColor">@color/foreground</item>
+        <item name="android:textColorHint">@color/foreground_dark</item>
+        <item name="actionOverflowButtonStyle">@style/ActionbarMenuStyle</item>
+    </style>
+
+    <style name="ActionbarMenuStyle" parent="Widget.AppCompat.ActionButton">
     </style>
 </resources>
