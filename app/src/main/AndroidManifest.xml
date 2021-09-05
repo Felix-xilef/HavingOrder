@@ -10,10 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HavingOrder">
         <activity
+            android:name=".AddEditUserActivity"
+            android:exported="true" />
+        <activity
+            android:name=".UsersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddEditOrderActivity"
+            android:exported="true" />
+        <activity
             android:name=".SignInActivity"
             android:exported="true" />
         <activity
-            android:name=".Orders"
+            android:name=".OrdersActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
