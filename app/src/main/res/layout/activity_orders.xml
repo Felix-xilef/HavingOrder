@@ -78,7 +78,7 @@
                     android:onClick="goToAddEditOrder">
 
                     <TextView
-                        android:id="@+id/lblDescription"
+                        android:id="@+id/lblName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -89,18 +89,18 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/lblStatus"
+                        android:id="@+id/lblType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:text="Cancelado"
                         android:textColor="@color/light_red"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblDescription"
+                        app:layout_constraintBottom_toBottomOf="@+id/lblName"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblDescription" />
+                        app:layout_constraintTop_toTopOf="@+id/lblName" />
 
                     <TextView
-                        android:id="@+id/lblDate"
+                        android:id="@+id/lblEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -109,7 +109,7 @@
                         android:text="dd/MM/yyyy HH:mm"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lblDescription" />
+                        app:layout_constraintTop_toBottomOf="@+id/lblName" />
 
                     <TextView
                         android:id="@+id/lblPrice"
@@ -117,9 +117,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:text="R$ xxx,xx"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblDate"
+                        app:layout_constraintBottom_toBottomOf="@+id/lblEmail"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblDate" />
+                        app:layout_constraintTop_toTopOf="@+id/lblEmail" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -131,7 +131,7 @@
                     android:onClick="goToAddEditOrder">
 
                     <TextView
-                        android:id="@+id/lblDescription"
+                        android:id="@+id/lblName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -142,18 +142,18 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/lblStatus"
+                        android:id="@+id/lblType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:text="Finalizado"
                         android:textColor="@color/light_green"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblDescription"
+                        app:layout_constraintBottom_toBottomOf="@+id/lblName"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblDescription" />
+                        app:layout_constraintTop_toTopOf="@+id/lblName" />
 
                     <TextView
-                        android:id="@+id/lblDate"
+                        android:id="@+id/lblEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -162,7 +162,7 @@
                         android:text="dd/MM/yyyy HH:mm"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lblDescription" />
+                        app:layout_constraintTop_toBottomOf="@+id/lblName" />
 
                     <TextView
                         android:id="@+id/lblPrice"
@@ -170,9 +170,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:text="R$ xxx,xx"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblDate"
+                        app:layout_constraintBottom_toBottomOf="@+id/lblEmail"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblDate" />
+                        app:layout_constraintTop_toTopOf="@+id/lblEmail" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -184,7 +184,7 @@
                     android:onClick="goToAddEditOrder">
 
                     <TextView
-                        android:id="@+id/lblDescription"
+                        android:id="@+id/lblName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -195,18 +195,18 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/lblStatus"
+                        android:id="@+id/lblType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:text="Aberto"
                         android:textColor="@color/light_blue"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblDescription"
+                        app:layout_constraintBottom_toBottomOf="@+id/lblName"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblDescription" />
+                        app:layout_constraintTop_toTopOf="@+id/lblName" />
 
                     <TextView
-                        android:id="@+id/lblDate"
+                        android:id="@+id/lblEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -215,7 +215,7 @@
                         android:text="dd/MM/yyyy HH:mm"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lblDescription" />
+                        app:layout_constraintTop_toBottomOf="@+id/lblName" />
 
                     <TextView
                         android:id="@+id/lblPrice"
@@ -223,9 +223,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:text="R$ xxx,xx"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblDate"
+                        app:layout_constraintBottom_toBottomOf="@+id/lblEmail"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblDate" />
+                        app:layout_constraintTop_toTopOf="@+id/lblEmail" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
@@ -240,7 +240,6 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:onClick="goToAddEditOrder"
-        app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />

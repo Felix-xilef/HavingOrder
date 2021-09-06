@@ -16,4 +16,6 @@
     <string name="btnUsers">Users / Clients</string>
     <string name="btnLogout">Logout</string>
     <string name="actionbarMenu">Menu</string>
+    <string name="userTypeDev">Developer</string>
+    <string name="userTypeClient">Client</string>
 </resources>
