@@ -17,4 +17,8 @@
     <string name="actionbarMenu">Menu</string>
     <string name="userTypeDev">Desenvolvedor</string>
     <string name="userTypeClient">Cliente</string>
+    <string name="name">Nome</string>
+    <string name="phone">Telefone</string>
+    <string name="userType">Tipo de usuário</string>
+    <string name="save">Salvar</string>
 </resources>

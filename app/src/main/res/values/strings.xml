@@ -18,4 +18,8 @@
     <string name="actionbarMenu">Menu</string>
     <string name="userTypeDev">Developer</string>
     <string name="userTypeClient">Client</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone number</string>
+    <string name="userType">User type</string>
+    <string name="save">Save</string>
 </resources>
