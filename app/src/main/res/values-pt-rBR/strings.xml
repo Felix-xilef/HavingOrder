@@ -17,4 +17,18 @@
     <string name="actionbarMenu">Menu</string>
     <string name="userTypeDev">Desenvolvedor</string>
     <string name="userTypeClient">Cliente</string>
+    <string name="name">Nome</string>
+    <string name="phone">Telefone</string>
+    <string name="userType">Tipo de usuário</string>
+    <string name="save">Salvar</string>
+    <string name="addEditOrder">Adicionar / Editar Ordem</string>
+    <string name="lblDescription">Descrição</string>
+    <string name="descriptionPlaceholder">Descrição da ordem de serviço</string>
+    <string name="lblStartDate">Data de abertura</string>
+    <string name="lblEndDate">Data de finalização</string>
+    <string name="datePlaceholder">DD/MM/AAAA</string>
+    <string name="lblPrice">Preço</string>
+    <string name="lblComment">Comentário</string>
+    <string name="btnSave">Salvar</string>
+    <string name="addEditUser">Adicionar / Editar Usuário</string>
 </resources>

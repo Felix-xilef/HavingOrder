@@ -6,7 +6,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="filter">Filter</string>
-    <string name="signup">Singup</string>
+    <string name="signup">Signup</string>
     <string name="signupSuccess">User signed up successfully!</string>
     <string name="signinSuccess">Signed in successfully!</string>
     <string name="signinFailure">Wrong email or password!</string>
@@ -18,4 +18,19 @@
     <string name="actionbarMenu">Menu</string>
     <string name="userTypeDev">Developer</string>
     <string name="userTypeClient">Client</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone number</string>
+    <string name="userType">User type</string>
+    <string name="save">Save</string>
+    <string name="addEditOrder">Add / Edit Order</string>
+    <string name="lblDescription">Description</string>
+    <string name="descriptionPlaceholder">Service order description</string>
+    <string name="lblStartDate">Start date</string>
+    <string name="lblEndDate">End date</string>
+    <string name="datePlaceholder">DD/MM/YYYY</string>
+    <string name="lblPrice">Price</string>
+    <string name="lblOrderStatus" translatable="false">Status</string>
+    <string name="lblComment">Comment</string>
+    <string name="btnSave">Save</string>
+    <string name="addEditUser">Add / Edit User</string>
 </resources>
