@@ -55,8 +55,8 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
     }
 
     public void saveOrder(View view) {
-        Intent intent = new Intent(this, OrdersActivity.class);
-        startActivity(intent);
+        /* Intent intent = new Intent(this, OrdersActivity.class);
+        startActivity(intent); */
         finish();
     }
 }

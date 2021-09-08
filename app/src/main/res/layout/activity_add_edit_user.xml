@@ -19,16 +19,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include"
-        app:layout_constraintVertical_bias="0.3">
+        app:layout_constraintVertical_bias="0.19999999">
+
+        <Spinner
+            android:id="@+id/cmbUserType"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:elevation="4dp"
+            android:foregroundTint="@color/foreground_dark"
+            app:layout_constraintEnd_toEndOf="@+id/txtPhone"
+            app:layout_constraintStart_toStartOf="@+id/txtPhone"
+            app:layout_constraintTop_toBottomOf="@+id/lblUserType"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/lblAddEditUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addEditUser"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/txtName"
+            app:layout_constraintStart_toStartOf="@+id/txtName"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/name"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/txtName"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/lblAddEditUser" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtName"
@@ -114,26 +139,8 @@
             android:layout_marginTop="16dp"
             android:text="@string/userType"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/cmbType"
+            app:layout_constraintStart_toStartOf="@+id/cmbUserType"
             app:layout_constraintTop_toBottomOf="@+id/txtPhone" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/cmbType"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:boxStrokeColor="@color/light_green"
-            app:hintTextColor="@color/light_green"
-            app:layout_constraintEnd_toEndOf="@+id/txtPhone"
-            app:layout_constraintStart_toStartOf="@+id/txtPhone"
-            app:layout_constraintTop_toBottomOf="@+id/lblUserType">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/userType" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/button"
@@ -141,13 +148,14 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginTop="16dp"
+            android:onClick="saveUser"
             android:text="@string/save"
             android:textAllCaps="false"
             android:textColor="@color/foreground"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/cmbType"
-            app:layout_constraintStart_toStartOf="@+id/cmbType"
-            app:layout_constraintTop_toBottomOf="@+id/cmbType" />
+            app:layout_constraintEnd_toEndOf="@+id/cmbUserType"
+            app:layout_constraintStart_toStartOf="@+id/cmbUserType"
+            app:layout_constraintTop_toBottomOf="@+id/cmbUserType" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
