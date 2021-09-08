@@ -197,23 +197,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtStatusOrder"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <Spinner
+                    android:id="@+id/statusSpinner"
                     android:layout_width="350dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_marginTop="8dp"
-                    app:boxStrokeColor="@color/light_green"
-                    app:hintTextColor="@color/light_green"
+                    android:elevation="4dp"
+                    android:foregroundTint="@color/foreground_dark"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lblOrderStatus">
+                    app:layout_constraintTop_toBottomOf="@+id/lblOrderStatus"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/lblOrderStatus" />
-                </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -231,29 +226,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtClient"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <Spinner
+                    android:id="@+id/clientsSpinner"
                     android:layout_width="350dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_marginTop="8dp"
-                    app:boxStrokeColor="@color/light_green"
-                    app:hintTextColor="@color/light_green"
+                    android:elevation="4dp"
+                    android:foregroundTint="@color/foreground_dark"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lblClient">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/userTypeClient" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/lblClient"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:onClick="saveOrder">
 
                 <TextView
                     android:id="@+id/lblComment"
@@ -297,6 +287,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="30dp"
+                android:onClick="saveOrder"
                 android:text="@string/btnSave" />
 
         </LinearLayout>
