@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddEditUserActivity">
+    tools:context=".activities.AddEditUserActivity">
 
     <include
         android:id="@+id/include"
@@ -21,23 +21,11 @@
         app:layout_constraintTop_toBottomOf="@+id/include"
         app:layout_constraintVertical_bias="0.19999999">
 
-        <Spinner
-            android:id="@+id/cmbUserType"
-            android:layout_width="350dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:elevation="4dp"
-            android:foregroundTint="@color/foreground_dark"
-            app:layout_constraintEnd_toEndOf="@+id/txtPhone"
-            app:layout_constraintStart_toStartOf="@+id/txtPhone"
-            app:layout_constraintTop_toBottomOf="@+id/lblUserType"
-            tools:ignore="SpeakableTextPresentCheck" />
-
         <TextView
             android:id="@+id/lblAddEditUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/addEditUser"
+            android:text="@string/addUser"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -68,6 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lblName">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtNameContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
@@ -97,6 +86,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lblEmail">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmailContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
@@ -126,6 +116,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lblPhone">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPhoneContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/phone"
@@ -141,6 +132,18 @@
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/cmbUserType"
             app:layout_constraintTop_toBottomOf="@+id/txtPhone" />
+
+        <Spinner
+            android:id="@+id/cmbUserType"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:elevation="4dp"
+            android:foregroundTint="@color/foreground_dark"
+            app:layout_constraintEnd_toEndOf="@+id/txtPhone"
+            app:layout_constraintStart_toStartOf="@+id/txtPhone"
+            app:layout_constraintTop_toBottomOf="@+id/lblUserType"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/button"

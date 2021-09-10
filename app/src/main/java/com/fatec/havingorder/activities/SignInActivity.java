@@ -1,10 +1,12 @@
-package com.fatec.havingorder;
+package com.fatec.havingorder.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.fatec.havingorder.R;
 
 public class SignInActivity extends AppCompatActivity {
 

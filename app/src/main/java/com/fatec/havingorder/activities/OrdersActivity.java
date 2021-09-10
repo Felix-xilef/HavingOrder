@@ -1,4 +1,4 @@
-package com.fatec.havingorder;
+package com.fatec.havingorder.activities;
 
 import androidx.annotation.NonNull;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.fatec.havingorder.R;
 
 public class OrdersActivity extends ActivityWithActionBar {
 

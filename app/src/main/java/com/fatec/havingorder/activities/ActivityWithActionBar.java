@@ -1,4 +1,4 @@
-package com.fatec.havingorder;
+package com.fatec.havingorder.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.fatec.havingorder.R;
 
 public abstract class ActivityWithActionBar extends AppCompatActivity {
 
