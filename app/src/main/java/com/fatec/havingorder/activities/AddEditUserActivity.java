@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.User;
@@ -16,16 +17,13 @@ import com.fatec.havingorder.services.UserService;
 
 public class AddEditUserActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
 
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
-    private int userId;
     private User user = new User();
 
     private EditText name;
     private EditText email;
     private EditText phone;
-
-    private TextView lblAddEditUser;
 
     private Spinner userTypeSpinner;
     private static final String[] userTypes = {"Desenvolvedor", "Cliente"};
@@ -48,12 +46,12 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
         email = (EditText) findViewById(R.id.txtEmailContent);
         phone = (EditText) findViewById(R.id.txtPhoneContent);
 
-        lblAddEditUser = (TextView) findViewById(R.id.lblAddEditUser);
+        TextView lblAddEditUser = (TextView) findViewById(R.id.lblAddEditUser);
 
         Intent intent = getIntent();
-        userId = intent.getIntExtra("userId", -1);
+        int userId = intent.getIntExtra("userId", 0);
 
-        if (userId > -1) {
+        if (userId > 0) {
             getUser(userId);
 
             lblAddEditUser.setText(getString(R.string.editUser));
@@ -70,6 +68,13 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
     }
 
     public void saveUser(View view) {
+        user.setEmail(email.getText().toString());
+        user.setName(name.getText().toString());
+        user.setPhone(phone.getText().toString());
+
+        if (user.isValid()) userService.saveUser(user);
+        else Toast.makeText(AddEditUserActivity.this, R.string.emptyFields, Toast.LENGTH_LONG).show();
+
         finish();
     }
 

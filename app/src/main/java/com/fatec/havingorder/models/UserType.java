@@ -34,6 +34,11 @@ public class UserType {
         this.description = description;
     }
 
+    public boolean isValid() {
+        if (id == 1 || id == 2) return true;
+        else return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

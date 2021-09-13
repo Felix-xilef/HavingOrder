@@ -65,6 +65,16 @@ public class User {
         this.type = type;
     }
 
+    public boolean isValid() {
+        if (
+                name != null && !name.isEmpty() &&
+                email != null && !email.isEmpty() &&
+                phone != null && !phone.isEmpty() &&
+                type.getClass() == UserType.class && type.isValid()
+        ) return true;
+        else return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

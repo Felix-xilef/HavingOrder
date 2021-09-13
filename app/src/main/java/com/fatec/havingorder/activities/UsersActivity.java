@@ -4,12 +4,25 @@ import androidx.annotation.NonNull;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.fatec.havingorder.R;
+import com.fatec.havingorder.models.User;
+import com.fatec.havingorder.services.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsersActivity extends ActivityWithActionBar {
+
+    private final UserService userService = new UserService();
+
+    private List<User> users = new ArrayList<>();
+
+    private LinearLayout userEntries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +30,10 @@ public class UsersActivity extends ActivityWithActionBar {
         setContentView(R.layout.activity_users);
 
         super.setCustomActionBar();
+
+        userEntries = (LinearLayout) findViewById(R.id.userEntries);
+
+        getUsers();
     }
 
     @Override
@@ -31,9 +48,22 @@ public class UsersActivity extends ActivityWithActionBar {
         }
     }
 
+    public void getUsers() {
+       users = userService.getUsers();
+
+       for (User user : users) {
+           View userEntry = LayoutInflater.from(this).inflate(R.layout.user_entry, null);
+           userEntry.setId(user.getId());
+
+           userEntries.addView(userEntry);
+           System.out.println("\n|\n|\t" + user.getId() + "\n|\n");
+       }
+    }
+
     public void goToAddEditUserWithContent(View view) {
+        System.out.println("\n|\n|\t" + view.getId() + "\n|\n");
         Intent intent = new Intent(this, AddEditUserActivity.class);
-        intent.putExtra("userId", Integer.parseInt(view.getContentDescription().toString()));
+        intent.putExtra("userId", view.getId());
 
         startActivity(intent);
     }
