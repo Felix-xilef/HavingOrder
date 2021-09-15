@@ -38,14 +38,11 @@ public class UsersActivity extends ActivityWithActionBar {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.btnUsers:
-                // It's the same page so do nothing
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.btnUsers) {
+            // It's the same page so do nothing
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public void getUsers() {
@@ -54,9 +51,10 @@ public class UsersActivity extends ActivityWithActionBar {
        for (User user : users) {
            View userEntry = LayoutInflater.from(this).inflate(R.layout.user_entry, null);
            userEntry.setId(user.getId());
+           userEntry.setOnClickListener(this::goToAddEditUser);
 
            userEntries.addView(userEntry);
-           System.out.println("\n|\n|\t" + user.getId() + "\n|\n");
+           System.out.println("\n|\n|\t" + userEntry.getId() + "\n|\n");
        }
     }
 
