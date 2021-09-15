@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.fatec.havingorder.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public abstract class ActivityWithActionBar extends AppCompatActivity {
 
@@ -46,6 +47,7 @@ public abstract class ActivityWithActionBar extends AppCompatActivity {
                 return true;
 
             case R.id.btnLogout:
+                FirebaseAuth.getInstance().signOut();
                 Intent intentLogout = new Intent(this, SignInActivity.class);
                 startActivity(intentLogout);
                 finish();

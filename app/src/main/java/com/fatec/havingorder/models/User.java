@@ -1,5 +1,7 @@
 package com.fatec.havingorder.models;
 
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
 public class User {
@@ -14,15 +16,23 @@ public class User {
 
     private UserType type;
 
+    private String password;
+
     public User() {
     }
 
     public User(int id, String name, String email, String phone, UserType type) {
+        this();
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.type = type;
+    }
+
+    public User(int id, String name, String email, String phone, UserType type, String password) {
+        this(id, name, email, phone, type);
+        this.password = password;
     }
 
     public int getId() {
@@ -65,14 +75,19 @@ public class User {
         this.type = type;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public boolean isValid() {
-        if (
-                name != null && !name.isEmpty() &&
+        return name != null && !name.isEmpty() &&
                 email != null && !email.isEmpty() &&
                 phone != null && !phone.isEmpty() &&
-                type.getClass() == UserType.class && type.isValid()
-        ) return true;
-        else return false;
+                type.getClass() == UserType.class && type.isValid();
     }
 
     @Override
@@ -88,6 +103,7 @@ public class User {
         return Objects.hash(id);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "User{" +
