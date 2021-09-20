@@ -30,5 +30,7 @@
     <string name="lblPrice">Preço</string>
     <string name="lblComment">Comentário</string>
     <string name="btnSave">Salvar</string>
-    <string name="addEditUser">Adicionar / Editar Usuário</string>
+    <string name="addUser">Adicionar Usuário</string>
+    <string name="editUser">Editar Usuário</string>
+    <string name="saveUserSuccess">Usuário salvo com sucesso!</string>
 </resources>

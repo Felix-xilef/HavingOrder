@@ -32,5 +32,7 @@
     <string name="lblOrderStatus" translatable="false">Status</string>
     <string name="lblComment">Comment</string>
     <string name="btnSave">Save</string>
-    <string name="addEditUser">Add / Edit User</string>
+    <string name="addUser">Add User</string>
+    <string name="editUser">Edit User</string>
+    <string name="saveUserSuccess">User successfully saved!</string>
 </resources>

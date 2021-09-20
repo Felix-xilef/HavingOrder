@@ -1,11 +1,12 @@
-package com.fatec.havingorder;
+package com.fatec.havingorder.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.fatec.havingorder.R;
 
 public class AddEditOrderActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
 

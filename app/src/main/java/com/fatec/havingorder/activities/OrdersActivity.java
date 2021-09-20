@@ -1,4 +1,4 @@
-package com.fatec.havingorder;
+package com.fatec.havingorder.activities;
 
 import androidx.annotation.NonNull;
 
@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-public class UsersActivity extends ActivityWithActionBar {
+import com.fatec.havingorder.R;
+
+public class OrdersActivity extends ActivityWithActionBar {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_users);
+        setContentView(R.layout.activity_orders);
 
         super.setCustomActionBar();
     }
@@ -20,7 +22,7 @@ public class UsersActivity extends ActivityWithActionBar {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.btnUsers:
+            case R.id.btnOrders:
                 // It's the same page so do nothing
                 return true;
 
@@ -29,8 +31,8 @@ public class UsersActivity extends ActivityWithActionBar {
         }
     }
 
-    public void goToAddEditUser(View view) {
-        Intent intent = new Intent(this, AddEditUserActivity.class);
+    public void goToAddEditOrder(View view) {
+        Intent intent = new Intent(this, AddEditOrderActivity.class);
         startActivity(intent);
     }
 }
