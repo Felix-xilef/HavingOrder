@@ -39,6 +39,10 @@ public class UserType {
         else return false;
     }
 
+    public boolean isClient() {
+        return id != 1;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
