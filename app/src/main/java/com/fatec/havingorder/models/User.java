@@ -2,11 +2,13 @@ package com.fatec.havingorder.models;
 
 import androidx.annotation.NonNull;
 
+import com.google.protobuf.Any;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class User {
-
-    private int id;
 
     private String name;
 
@@ -21,26 +23,12 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String email, String phone, UserType type) {
+    public User(String name, String email, String phone, UserType type) {
         this();
-        this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.type = type;
-    }
-
-    public User(int id, String name, String email, String phone, UserType type, String password) {
-        this(id, name, email, phone, type);
-        this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -95,23 +83,33 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id;
+        return Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(email);
     }
 
     @NonNull
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", type=" + type +
                 '}';
+    }
+
+    public Map<String, Object> toDBEntry() {
+        Map<String, Object> dbEntry = new HashMap<>();
+
+        dbEntry.put("name", name);
+        dbEntry.put("email", email);
+        dbEntry.put("phone", phone);
+        dbEntry.put("type", type.toDBEntry());
+
+        return dbEntry;
     }
 }

@@ -1,15 +1,14 @@
 package com.fatec.havingorder.activities;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.User;
@@ -48,30 +47,40 @@ public class UsersActivity extends ActivityWithActionBar {
     }
 
     public void getUsers() {
-       users = userService.getUsers();
+       userService.getUsers().addOnCompleteListener(task -> {
+           if (task.isSuccessful() && task.getResult() != null) {
+               users = task.getResult().toObjects(User.class);
 
-       for (User user : users) {
-           View userEntry = getLayoutInflater().inflate(R.layout.user_entry, userEntries, false);
+               for (User user : users) {
+                   View userEntry = getLayoutInflater().inflate(R.layout.user_entry, userEntries, false);
 
-           userEntry.findViewById(R.id.userEntry).setId(user.getId());
+                   userEntry.findViewById(R.id.userEntry).setContentDescription(user.getEmail());
 
-           ((TextView) userEntry.findViewById(R.id.lblUserName)).setText(user.getName());
+                   ((TextView) userEntry.findViewById(R.id.lblUserName)).setText(user.getName());
 
-           ((TextView) userEntry.findViewById(R.id.lblUserEmail)).setText(user.getEmail());
+                   ((TextView) userEntry.findViewById(R.id.lblUserEmail)).setText(user.getEmail());
 
-           ((TextView) userEntry.findViewById(R.id.lblUserType)).setText(user.getType().getDescription());
-           ((TextView) userEntry.findViewById(R.id.lblUserType)).setTextColor(
-                   user.getType().isClient() ? getColor(R.color.orange) : getColor(R.color.light_green)
-           );
+                   ((TextView) userEntry.findViewById(R.id.lblUserType)).setText(user.getType().getDescription());
+                   ((TextView) userEntry.findViewById(R.id.lblUserType)).setTextColor(
+                           user.getType().isClient() ? getColor(R.color.orange) : getColor(R.color.light_green)
+                   );
 
-           userEntries.addView(userEntry);
-       }
+                   userEntries.addView(userEntry);
+               }
+
+           } else {
+               Toast.makeText(
+                       UsersActivity.this,
+                       getText(R.string.getUserError) + (task.getException() != null ? task.getException().toString() : ""),
+                       Toast.LENGTH_SHORT
+               ).show();
+           }
+       });
     }
 
     public void goToAddEditUserWithContent(View view) {
-        System.out.println("\n|\n|\t" + view.getId() + "\n|\n");
         Intent intent = new Intent(this, AddEditUserActivity.class);
-        intent.putExtra("userId", view.getId());
+        intent.putExtra("userEmail", view.getContentDescription());
 
         startActivity(intent);
     }

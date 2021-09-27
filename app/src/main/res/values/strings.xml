@@ -35,4 +35,5 @@
     <string name="addUser">Add User</string>
     <string name="editUser">Edit User</string>
     <string name="saveUserSuccess">User successfully saved!</string>
+    <string name="getUserError">Error when getting user(s)</string>
 </resources>

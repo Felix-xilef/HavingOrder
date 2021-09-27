@@ -14,7 +14,9 @@ import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.User;
 import com.fatec.havingorder.models.UserType;
 import com.fatec.havingorder.services.UserService;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class AddEditUserActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
 
@@ -54,12 +56,12 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
         TextView lblAddEditUser = (TextView) findViewById(R.id.lblAddEditUser);
 
         Intent intent = getIntent();
-        int userId = intent.getIntExtra("userId", 0);
+        String userEmail = intent.getStringExtra("userEmail");
 
-        isEditing = userId > 0;
+        isEditing = userEmail != null && !userEmail.isEmpty();
 
         if (isEditing) {
-            getUser(userId);
+            getUser(userEmail);
 
             lblAddEditUser.setText(getString(R.string.editUser));
         }
@@ -81,7 +83,7 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
         user.setPassword(password.getText().toString());
 
         if (user.isValid() && (isEditing || (user.getPassword() != null && !user.getPassword().isEmpty()))) {
-            userService.saveUser(user);
+            userService.save(user);
 
             if (!isEditing) FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.getEmail(), user.getPassword());
 
@@ -94,12 +96,28 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
         }
     }
 
-    public void getUser(int id) {
-        user = userService.getUser(id);
+    public void getUser(String userEmail) {
+        userService.getUser(userEmail).addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                user = task.getResult().toObject(User.class);
 
-        name.setText(user.getName());
-        email.setText(user.getEmail());
-        phone.setText(user.getPhone());
-        userTypeSpinner.setSelection(user.getType().getId() - 1);
+                if (user != null) {
+                    name.setText(user.getName());
+                    email.setText(user.getEmail());
+                    phone.setText(user.getPhone());
+                    userTypeSpinner.setSelection(user.getType().getId() - 1);
+
+                } else showGetUserError(task);
+
+            } else showGetUserError(task);
+        });
+    }
+
+    private void showGetUserError(Task<DocumentSnapshot> task) {
+        Toast.makeText(
+                AddEditUserActivity.this,
+                getText(R.string.getUserError) + (task.getException() != null ? task.getException().toString() : ""),
+                Toast.LENGTH_SHORT
+        ).show();
     }
 }
