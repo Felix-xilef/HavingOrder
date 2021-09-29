@@ -9,11 +9,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.fatec.havingorder.R;
+import com.fatec.havingorder.models.User;
+import com.fatec.havingorder.services.UserService;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class SignInActivity extends AppCompatActivity {
-
-    private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private EditText txtEmail;
     private EditText txtPassword;
@@ -23,12 +25,8 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        if (auth.getCurrentUser() != null) {
-            goToNextActivity();
-        }
-
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtPassword = findViewById(R.id.txtPassword);
     }
 
     public void SignIn(View view) {
@@ -39,20 +37,24 @@ public class SignInActivity extends AppCompatActivity {
             Toast.makeText(SignInActivity.this, R.string.emptyFields, Toast.LENGTH_SHORT).show();
 
         } else {
-            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(SignInActivity.this, R.string.signinSuccess, Toast.LENGTH_SHORT).show();
-                    goToNextActivity();
+                    (new UserService()).setLoggedUser(email).addOnCompleteListener(setUserTask -> {
+                        if (setUserTask.isSuccessful()) {
+                            Toast.makeText(SignInActivity.this, R.string.signinSuccess, Toast.LENGTH_SHORT).show();
 
-                } else {
-                    Toast.makeText(SignInActivity.this, R.string.signinFailure, Toast.LENGTH_SHORT).show();
-                }
+                            goToActivity(OrdersActivity.class);
+
+                        } else Toast.makeText(SignInActivity.this, R.string.setLoggedUserError, Toast.LENGTH_SHORT).show();
+                    });
+
+                } else Toast.makeText(SignInActivity.this, R.string.signinFailure, Toast.LENGTH_SHORT).show();
             });
         }
     }
 
-    public void goToNextActivity() {
-        Intent intent = new Intent(this, OrdersActivity.class);
+    public void goToActivity(Class<?> cls) {
+        Intent intent = new Intent(this, cls);
         startActivity(intent);
         finish();
     }

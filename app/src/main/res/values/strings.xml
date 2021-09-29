@@ -36,4 +36,5 @@
     <string name="editUser">Edit User</string>
     <string name="saveUserSuccess">User successfully saved!</string>
     <string name="getUserError">Error when getting user(s)</string>
+    <string name="setLoggedUserError">Error when setting the logged user!</string>
 </resources>
