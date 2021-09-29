@@ -2,37 +2,27 @@ package com.fatec.havingorder.services;
 
 import com.fatec.havingorder.models.User;
 import com.fatec.havingorder.models.UserType;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class UserService {
-    private List<User> users = Arrays.asList(
-            new User(1, "Marquinhos Dev", "marq@server.com", "11965654848", new UserType(1)),
-            new User(2, "Marquinhos Cliente", "marqC@server.com", "11915754948", new UserType(2)),
-            new User(3, "Dev test", "dev@server.com", "11966332015", new UserType(1))
-    );
+    private final CollectionReference db = FirebaseFirestore.getInstance().collection("users");
 
-    public List<User> getUsers() {
-        return users;
+    public Task<QuerySnapshot> getUsers() {
+        return db.get();
     }
 
-    public User getUser(int id) {
-        for (User user : users) {
-            if (user.getId() == id) return user;
-        }
-
-        return null;
+    public Task<DocumentSnapshot> getUser(String email) {
+        return db.document(email).get();
     }
 
-    public void saveUser(User user) {
-        for (User userInArray : users) {
-            if (userInArray.equals(user)) {
-                userInArray = user;
-                return;
-            }
-        }
-
-        users.add(user);
+    public void save(User user) {
+        db.document(user.getEmail()).set(user.toDBEntry());
     }
 }

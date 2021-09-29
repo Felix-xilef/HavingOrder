@@ -4,22 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class UserType {
+public class OrderStatus {
 
     private int id;
 
     private String description;
 
-    public UserType() {
+    public OrderStatus() {
     }
 
-    public UserType(int id) {
+    public OrderStatus(int id) {
         this();
 
         this.id = id;
 
-        if (id == 1) this.description = "Desenvolvedor";
-        else this.description = "Cliente";
+        if (id == 1) description = "Aberto";
+        else if (id == 2) description = "Finalizado";
+        else description = "Cancelado";
     }
 
     public int getId() {
@@ -39,32 +40,24 @@ public class UserType {
     }
 
     public boolean isValid() {
-        return id == 1 || id == 2;
+        return id == 1 || id == 2 || id == 3;
     }
 
-    public boolean isClient() {
-        return id != 1;
+    public boolean isOpen() {
+        return id == 1;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserType userType = (UserType) o;
-        return id == userType.id;
+        OrderStatus that = (OrderStatus) o;
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "UserType{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                '}';
     }
 
     public Map<String, Object> toDBEntry() {
