@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +22,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 public class AddEditUserActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
 
     private boolean isEditing;
+
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private final UserService userService = new UserService();
 
@@ -41,19 +44,17 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
 
         super.setCustomActionBar();
 
-        userTypeSpinner = (Spinner) findViewById(R.id.cmbUserType);
+        userTypeSpinner = findViewById(R.id.cmbUserType);
         ArrayAdapter<String> userTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, userTypes);
 
         userTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userTypeSpinner.setAdapter(userTypeAdapter);
         userTypeSpinner.setOnItemSelectedListener(this);
 
-        name = (EditText) findViewById(R.id.txtNameContent);
-        email = (EditText) findViewById(R.id.txtEmailContent);
-        phone = (EditText) findViewById(R.id.txtPhoneContent);
-        password = (EditText) findViewById(R.id.txtPasswordContent);
-
-        TextView lblAddEditUser = (TextView) findViewById(R.id.lblAddEditUser);
+        name = findViewById(R.id.txtNameContent);
+        email = findViewById(R.id.txtEmailContent);
+        phone = findViewById(R.id.txtPhoneContent);
+        password = findViewById(R.id.txtPasswordContent);
 
         Intent intent = getIntent();
         String userEmail = intent.getStringExtra("userEmail");
@@ -62,9 +63,10 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
 
         if (isEditing) {
             getUser(userEmail);
+            super.setActionBarTitle(R.string.editUser);
+            findViewById(R.id.btnRemove).setVisibility(View.VISIBLE);
 
-            lblAddEditUser.setText(getString(R.string.editUser));
-        }
+        } else super.setActionBarTitle(R.string.addUser);
     }
 
     @Override
@@ -85,15 +87,16 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
         if (user.isValid() && (isEditing || (user.getPassword() != null && !user.getPassword().isEmpty()))) {
             userService.save(user);
 
-            if (!isEditing) FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.getEmail(), user.getPassword());
+            if (!isEditing) auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword());
 
             Toast.makeText(AddEditUserActivity.this, R.string.saveUserSuccess, Toast.LENGTH_SHORT).show();
 
             finish();
 
-        } else {
-            Toast.makeText(AddEditUserActivity.this, R.string.emptyFields, Toast.LENGTH_SHORT).show();
-        }
+        } else Toast.makeText(AddEditUserActivity.this, R.string.emptyFields, Toast.LENGTH_SHORT).show();
+    }
+
+    public void removeUser(View view) {
     }
 
     public void getUser(String userEmail) {

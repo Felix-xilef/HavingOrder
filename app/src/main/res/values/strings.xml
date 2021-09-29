@@ -22,7 +22,6 @@
     <string name="phone">Phone number</string>
     <string name="userType">User type</string>
     <string name="save">Save</string>
-    <string name="addEditOrder">Add / Edit Order</string>
     <string name="lblDescription">Description</string>
     <string name="descriptionPlaceholder">Service order description</string>
     <string name="lblStartDate">Start date</string>
@@ -37,4 +36,7 @@
     <string name="saveUserSuccess">User successfully saved!</string>
     <string name="getUserError">Error when getting user(s)</string>
     <string name="setLoggedUserError">Error when setting the logged user!</string>
+    <string name="addOrder">Add Order</string>
+    <string name="editOrder">Edit Order</string>
+    <string name="remove">Remove</string>
 </resources>

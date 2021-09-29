@@ -16,8 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public abstract class ActivityWithActionBar extends AppCompatActivity {
 
-    private final FirebaseAuth auth = FirebaseAuth.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,5 +69,10 @@ public abstract class ActivityWithActionBar extends AppCompatActivity {
         Toolbar appToolBar = (Toolbar) findViewById(R.id.appToolbar);
         setSupportActionBar(appToolBar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    protected void setActionBarTitle(int textId) {
+        getSupportActionBar().setTitle(textId);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
     }
 }

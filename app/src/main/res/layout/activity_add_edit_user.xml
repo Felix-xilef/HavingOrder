@@ -14,7 +14,8 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include">
@@ -26,20 +27,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/lblAddEditUser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/addUser"
-                    android:textAlignment="center"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/txtName"
-                    app:layout_constraintStart_toStartOf="@+id/txtName"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
 
                 <TextView
                     android:id="@+id/lblName"
@@ -49,7 +38,7 @@
                     android:text="@string/name"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/txtName"
-                    app:layout_constraintTop_toBottomOf="@+id/lblAddEditUser" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtName"
@@ -184,7 +173,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btnSave"
                     style="@style/TextAppearance.MaterialComponents.Button"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
@@ -197,6 +186,23 @@
                     app:layout_constraintEnd_toEndOf="@+id/txtPassword"
                     app:layout_constraintStart_toStartOf="@+id/txtPassword"
                     app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+
+                <Button
+                    android:id="@+id/btnRemove"
+                    style="@style/TextAppearance.MaterialComponents.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/light_red"
+                    android:onClick="removeUser"
+                    android:text="@string/remove"
+                    android:textAllCaps="false"
+                    android:textColor="@color/foreground"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/btnSave"
+                    app:layout_constraintStart_toStartOf="@+id/btnSave"
+                    app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

@@ -1,5 +1,6 @@
 package com.fatec.havingorder.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +10,8 @@ import android.widget.Spinner;
 import com.fatec.havingorder.R;
 
 public class AddEditOrderActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
+
+    private boolean isEditing;
 
     private Spinner statusSpinner;
     private Spinner clientsSpinner;
@@ -35,6 +38,17 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
         clientsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         clientsSpinner.setAdapter(clientsAdapter);
         clientsSpinner.setOnItemSelectedListener(this);
+
+        Intent intent = getIntent();
+        String orderId = intent.getStringExtra("orderId");
+
+        isEditing = orderId != null && !orderId.isEmpty();
+
+        if (isEditing) {
+            getOrder(orderId);
+            super.setActionBarTitle(R.string.editOrder);
+
+        } else super.setActionBarTitle(R.string.addOrder);
     }
 
     @Override
@@ -52,12 +66,14 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
     public void saveOrder(View view) {
-        /* Intent intent = new Intent(this, OrdersActivity.class);
-        startActivity(intent); */
-        finish();
+        if (isEditing) finish();
+        else finish();
+    }
+
+    public void getOrder(String orderId) {
+
     }
 }

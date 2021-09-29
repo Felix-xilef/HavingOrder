@@ -21,7 +21,6 @@
     <string name="phone">Telefone</string>
     <string name="userType">Tipo de usuário</string>
     <string name="save">Salvar</string>
-    <string name="addEditOrder">Adicionar / Editar Ordem</string>
     <string name="lblDescription">Descrição</string>
     <string name="descriptionPlaceholder">Descrição da ordem de serviço</string>
     <string name="lblStartDate">Data de abertura</string>
@@ -35,4 +34,7 @@
     <string name="saveUserSuccess">Usuário salvo com sucesso!</string>
     <string name="getUserError">Erro ao recuperar usuário(s):</string>
     <string name="setLoggedUserError">Erro ao definir usuário logado!</string>
+    <string name="addOrder">Adicionar Ordem</string>
+    <string name="editOrder">Editar Ordem</string>
+    <string name="remove">Remover</string>
 </resources>
