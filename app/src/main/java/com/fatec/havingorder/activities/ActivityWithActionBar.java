@@ -11,9 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.fatec.havingorder.R;
+import com.fatec.havingorder.services.UserService;
 import com.google.firebase.auth.FirebaseAuth;
 
 public abstract class ActivityWithActionBar extends AppCompatActivity {
+
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,13 @@ public abstract class ActivityWithActionBar extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.nav_items, menu);
+
+        if (UserService.loggedUser.getType().isClient()) {
+            getMenuInflater().inflate(R.menu.nav_items_client, menu);
+
+        } else {
+            getMenuInflater().inflate(R.menu.nav_items_dev, menu);
+        }
 
         return true;
     }
