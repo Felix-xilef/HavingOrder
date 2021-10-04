@@ -55,6 +55,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/lblDescription">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtDescriptionContent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/descriptionPlaceholder"
@@ -72,18 +73,25 @@
                     app:layout_constraintStart_toStartOf="@+id/txtDescription"
                     app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtStartDate"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:hint="@string/datePlaceholder"
-                    android:inputType="date"
-                    android:textColorHint="@color/foreground_dark"
+                    app:boxStrokeColor="@color/light_green"
+                    app:hintTextColor="@color/light_green"
                     app:layout_constraintEnd_toEndOf="@+id/txtDescription"
                     app:layout_constraintStart_toStartOf="@+id/txtDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/lblStartDate" />
+                    app:layout_constraintTop_toBottomOf="@+id/lblStartDate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtStartDateContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/datePlaceholder"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/lblEndDate"
@@ -95,18 +103,25 @@
                     app:layout_constraintStart_toStartOf="@+id/txtStartDate"
                     app:layout_constraintTop_toBottomOf="@+id/txtStartDate" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtEndDate"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:hint="@string/datePlaceholder"
-                    android:inputType="date"
-                    android:textColorHint="@color/foreground_dark"
+                    app:boxStrokeColor="@color/light_green"
+                    app:hintTextColor="@color/light_green"
                     app:layout_constraintEnd_toEndOf="@+id/txtStartDate"
                     app:layout_constraintStart_toStartOf="@+id/txtStartDate"
-                    app:layout_constraintTop_toBottomOf="@+id/lblEndDate" />
+                    app:layout_constraintTop_toBottomOf="@+id/lblEndDate" >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtEndDateContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/datePlaceholder"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/lblEditPrice"
@@ -132,6 +147,7 @@
                     app:prefixText="R$">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtPriceContent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/lblPrice"
@@ -223,6 +239,23 @@
                     app:layout_constraintEnd_toEndOf="@+id/txtComment"
                     app:layout_constraintStart_toStartOf="@+id/txtComment"
                     app:layout_constraintTop_toBottomOf="@+id/txtComment" />
+
+                <Button
+                    android:id="@+id/btnRemove"
+                    style="@style/TextAppearance.MaterialComponents.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/light_red"
+                    android:onClick="removeOrder"
+                    android:text="@string/remove"
+                    android:textAllCaps="false"
+                    android:textColor="@color/foreground"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/btnSave"
+                    app:layout_constraintStart_toStartOf="@+id/btnSave"
+                    app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

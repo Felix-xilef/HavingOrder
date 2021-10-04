@@ -37,4 +37,6 @@
     <string name="addOrder">Adicionar Ordem</string>
     <string name="editOrder">Editar Ordem</string>
     <string name="remove">Remover</string>
+    <string name="getOrderError">Erro ao recuperar ordem(s):</string>
+    <string name="saveOrderSuccess">Ordem salva com sucesso!</string>
 </resources>

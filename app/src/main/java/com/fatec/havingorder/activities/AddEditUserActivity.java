@@ -97,6 +97,9 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
     }
 
     public void removeUser(View view) {
+        /*auth.delete
+
+        userService.remove(user);*/
     }
 
     public void getUser(String userEmail) {

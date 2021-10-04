@@ -47,6 +47,14 @@ public class OrderStatus {
         return id == 1;
     }
 
+    public boolean isClosed() {
+        return id == 2;
+    }
+
+    public boolean isCalledOff() {
+        return id == 3;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

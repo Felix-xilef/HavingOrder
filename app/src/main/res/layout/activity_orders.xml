@@ -44,6 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lblFilter">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtFilterContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/filter"
@@ -62,172 +63,13 @@
             app:layout_constraintTop_toBottomOf="@+id/txtFilter">
 
             <LinearLayout
+                android:id="@+id/orderEntries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@color/foreground_dark"
                 android:dividerPadding="10dp"
                 android:orientation="vertical"
-                android:showDividers="middle">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="goToAddEditOrder">
-
-                    <TextView
-                        android:id="@+id/lblName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Descrição da ordem de serviço"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/lblType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="Cancelado"
-                        android:textColor="@color/light_red"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblName" />
-
-                    <TextView
-                        android:id="@+id/lblEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="dd/MM/yyyy HH:mm"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lblName" />
-
-                    <TextView
-                        android:id="@+id/lblPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="R$ xxx,xx"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblEmail"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblEmail" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="goToAddEditOrder">
-
-                    <TextView
-                        android:id="@+id/lblName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Descrição da ordem de serviço"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/lblType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="Finalizado"
-                        android:textColor="@color/light_green"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblName" />
-
-                    <TextView
-                        android:id="@+id/lblEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="dd/MM/yyyy HH:mm"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lblName" />
-
-                    <TextView
-                        android:id="@+id/lblPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="R$ xxx,xx"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblEmail"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblEmail" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="goToAddEditOrder">
-
-                    <TextView
-                        android:id="@+id/lblName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Descrição da ordem de serviço"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/lblType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="Aberto"
-                        android:textColor="@color/light_blue"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblName" />
-
-                    <TextView
-                        android:id="@+id/lblEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="dd/MM/yyyy HH:mm"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lblName" />
-
-                    <TextView
-                        android:id="@+id/lblPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="R$ xxx,xx"
-                        app:layout_constraintBottom_toBottomOf="@+id/lblEmail"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/lblEmail" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
+                android:showDividers="middle"/>
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

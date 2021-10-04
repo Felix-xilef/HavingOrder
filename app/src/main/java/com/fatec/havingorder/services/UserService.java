@@ -32,4 +32,8 @@ public class UserService {
     public void save(User user) {
         db.document(user.getEmail()).set(user.toDBEntry());
     }
+
+    public void remove(User user) {
+        db.document(user.getEmail()).delete();
+    }
 }

@@ -22,4 +22,8 @@ public class OrderService {
     public void save(Order order) {
         db.document(order.getId()).set(order.toDBEntry());
     }
+
+    public void remove(Order order) {
+        db.document(order.getId()).delete();
+    }
 }

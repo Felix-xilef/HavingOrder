@@ -39,4 +39,6 @@
     <string name="addOrder">Add Order</string>
     <string name="editOrder">Edit Order</string>
     <string name="remove">Remove</string>
+    <string name="getOrderError">Error when getting order(s)</string>
+    <string name="saveOrderSuccess">Order successfully saved!</string>
 </resources>
