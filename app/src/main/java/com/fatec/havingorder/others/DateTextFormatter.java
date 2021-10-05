@@ -3,7 +3,10 @@ package com.fatec.havingorder.others;
 import android.annotation.SuppressLint;
 import android.widget.EditText;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DateTextFormatter {
 
@@ -55,5 +58,20 @@ public class DateTextFormatter {
             dateInput.setText(current);
             dateInput.setSelection(Math.min(sel, current.length()));
         }
+    }
+
+    public static Calendar stringToCalendar(String stringDate) throws ParseException {
+        return stringToCalendar(stringDate, "dd/MM/yyyy");
+    }
+
+    public static Calendar stringToCalendar(String stringDate, String format) throws ParseException {
+        if (stringDate != null && !stringDate.isEmpty() && format != null && !format.isEmpty()) {
+            Calendar calendarDate = Calendar.getInstance();
+
+            calendarDate.setTime((new SimpleDateFormat(format)).parse(stringDate));
+
+            return calendarDate;
+
+        } else return null;
     }
 }

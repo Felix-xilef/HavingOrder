@@ -15,13 +15,18 @@ import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.Order;
 import com.fatec.havingorder.models.OrderStatus;
 import com.fatec.havingorder.models.User;
+import com.fatec.havingorder.models.UserType;
 import com.fatec.havingorder.others.DateTextFormatter;
 import com.fatec.havingorder.services.OrderService;
 import com.fatec.havingorder.services.UserService;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddEditOrderActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
 
@@ -40,8 +45,9 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
     private Spinner clientSpinner;
 
     private static final String[] statusItems = {"Aberto", "Finalizado", "Cancelado"};
-    private static final String[] clientItems = {"Usuário1", "Usuário2", "Usuário3", "Usuário4"};
 
+    private static List<String> clientNames = new ArrayList<>();
+    private List<User> clients = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,35 +56,48 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
 
         super.setCustomActionBar();
 
-        statusSpinner = (Spinner) findViewById(R.id.statusSpinner);
-        clientSpinner = (Spinner) findViewById(R.id.clientsSpinner);
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(AddEditOrderActivity.this, android.R.layout.simple_spinner_item, statusItems);
-        ArrayAdapter<String> clientsAdapter = new ArrayAdapter<String>(AddEditOrderActivity.this, android.R.layout.simple_spinner_item, clientItems);
-
-        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        statusSpinner.setAdapter(statusAdapter);
-        statusSpinner.setOnItemSelectedListener(this);
-
-        clientsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        clientSpinner.setAdapter(clientsAdapter);
-        clientSpinner.setOnItemSelectedListener(this);
-
+        // Getting the views
         description = findViewById(R.id.txtDescriptionContent);
         startDate = findViewById(R.id.txtStartDateContent);
         endDate = findViewById(R.id.txtEndDateContent);
         price = findViewById(R.id.txtPriceContent);
+        statusSpinner = (Spinner) findViewById(R.id.statusSpinner);
+        clientSpinner = (Spinner) findViewById(R.id.clientsSpinner);
 
-        Intent intent = getIntent();
-        String orderId = intent.getStringExtra("orderId");
+        // Setting statusSpinner up
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(AddEditOrderActivity.this, android.R.layout.simple_spinner_item, statusItems);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statusSpinner.setAdapter(statusAdapter);
+        statusSpinner.setOnItemSelectedListener(this);
 
-        isEditing = orderId != null && !orderId.isEmpty();
+        (new UserService()).getUsers(new UserType(2)).addOnCompleteListener(task -> {
 
-        if (isEditing) {
-            getOrder(orderId);
-            super.setActionBarTitle(R.string.editOrder);
-            findViewById(R.id.btnRemove).setVisibility(View.VISIBLE);
+            // Setting clientSpinner up
+            if (task.isSuccessful() && task.getResult() != null) {
+                clients = task.getResult().toObjects(User.class);
 
-        } else super.setActionBarTitle(R.string.addOrder);
+                for (User client : clients) clientNames.add(client.getName());
+
+                ArrayAdapter<String> clientsAdapter = new ArrayAdapter<>(AddEditOrderActivity.this, android.R.layout.simple_spinner_item, clientNames);
+                clientsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                clientSpinner.setAdapter(clientsAdapter);
+                clientSpinner.setOnItemSelectedListener(this);
+
+            } else Toast.makeText(AddEditOrderActivity.this, R.string.getUserError, Toast.LENGTH_SHORT).show();
+
+            // Verifying scope
+            Intent intent = getIntent();
+            String orderId = intent.getStringExtra("orderId");
+
+            isEditing = orderId != null && !orderId.isEmpty();
+
+            if (isEditing) {
+                getOrder(orderId);
+                super.setActionBarTitle(R.string.editOrder);
+                findViewById(R.id.btnRemove).setVisibility(View.VISIBLE);
+
+            } else super.setActionBarTitle(R.string.addOrder);
+        });
 
         startDate.addTextChangedListener(new TextWatcher() {
             @Override
@@ -118,7 +137,7 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         if (v.getId() == R.id.statusSpinner) order.setStatus(new OrderStatus(position + 1));
-        // else order.setClient();
+        else if (v.getId() == R.id.clientsSpinner) order.setClient(clients.get(position));
     }
 
     @Override
@@ -126,13 +145,22 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
     }
 
     public void saveOrder(View view) {
-        System.out.println("\n|\n|\tstartDate -> " + startDate.getText().toString() + "\n|");
-        System.out.println("\n|\n|\tstartDate -> " + endDate.getText().toString() + "\n|");
+        try {
+            order.setStartDate(DateTextFormatter.stringToCalendar(startDate.getText().toString()));
+            order.setEndDate(DateTextFormatter.stringToCalendar(endDate.getText().toString()));
 
-        /*order.setDescription(description.getText().toString());
-        order.setStartDate(startDate.getText().toString());
-        order.setEndDate(endDate.getText().toString());
+        } catch (ParseException e) {
+            Toast.makeText(
+                    AddEditOrderActivity.this,
+                    getString(R.string.saveOrderError) + ": " + e.getMessage(),
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
+
+        order.setDescription(description.getText().toString());
         order.setPrice(Float.parseFloat(price.getText().toString()));
+
+        //order.setComment();
 
         if (order.isValid()) {
             orderService.save(order);
@@ -141,7 +169,7 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
 
             finish();
 
-        } else Toast.makeText(AddEditOrderActivity.this, R.string.emptyFields, Toast.LENGTH_SHORT).show();*/
+        } else Toast.makeText(AddEditOrderActivity.this, R.string.emptyFields, Toast.LENGTH_SHORT).show();
     }
 
     public void removeOrder(View view) {
@@ -159,7 +187,9 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
                     endDate.setText(order.getEndDate().toString());
                     price.setText(String.valueOf(order.getPrice()));
                     statusSpinner.setSelection(order.getStatus().getId() - 1);
-                    // clientSpinner.setSelection(order.getClient());
+                    clientSpinner.setSelection(clients.indexOf(order.getClient()));
+
+                    // Set comments
 
                 } else showGetUserError(task);
 

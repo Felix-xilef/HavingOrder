@@ -39,4 +39,5 @@
     <string name="remove">Remover</string>
     <string name="getOrderError">Erro ao recuperar ordem(s):</string>
     <string name="saveOrderSuccess">Ordem salva com sucesso!</string>
+    <string name="saveOrderError">Error ao salvar ordem(s)</string>
 </resources>

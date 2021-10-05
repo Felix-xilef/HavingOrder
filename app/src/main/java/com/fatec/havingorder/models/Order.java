@@ -92,13 +92,10 @@ public class Order {
     }
 
     public boolean isValid() {
-        return id != null && !id.isEmpty() &&
-                description != null && !description.isEmpty() &&
+        return description != null && !description.isEmpty() &&
                 startDate != null &&
-                endDate != null &&
                 status.getClass() == OrderStatus.class && status.isValid() &&
-                client.getClass() == User.class && client.isValid() &&
-                comments != null;
+                client.getClass() == User.class && client.isValid();
     }
 
     @Override

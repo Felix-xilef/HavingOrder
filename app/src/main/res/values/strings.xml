@@ -41,4 +41,5 @@
     <string name="remove">Remove</string>
     <string name="getOrderError">Error when getting order(s)</string>
     <string name="saveOrderSuccess">Order successfully saved!</string>
+    <string name="saveOrderError">Error when saving order(s)</string>
 </resources>
