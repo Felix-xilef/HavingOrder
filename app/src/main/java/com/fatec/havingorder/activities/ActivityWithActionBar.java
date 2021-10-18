@@ -25,7 +25,7 @@ public abstract class ActivityWithActionBar extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
-        if (UserService.loggedUser.getType().isClient()) {
+        if (UserService.loggedUser.getType() == null || UserService.loggedUser.getType().isClient()) {
             getMenuInflater().inflate(R.menu.nav_items_client, menu);
 
         } else {

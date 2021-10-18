@@ -1,7 +1,6 @@
 package com.fatec.havingorder.services;
 
 import com.fatec.havingorder.models.Order;
-import com.fatec.havingorder.models.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -19,8 +18,8 @@ public class OrderService {
         return db.document(id).get();
     }
 
-    public void save(Order order) {
-        db.document(order.getId()).set(order.toDBEntry());
+    public Task<Void> save(Order order) {
+        return db.document(order.getId()).set(order.toDBEntry());
     }
 
     public void remove(Order order) {

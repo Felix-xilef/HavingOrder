@@ -136,8 +136,8 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-        if (v.getId() == R.id.statusSpinner) order.setStatus(new OrderStatus(position + 1));
-        else if (v.getId() == R.id.clientsSpinner) order.setClient(clients.get(position));
+        if (parent.getId() == R.id.statusSpinner) order.setStatus(new OrderStatus(position + 1));
+        else if (parent.getId() == R.id.clientsSpinner) order.setClient(clients.get(position));
     }
 
     @Override
@@ -162,12 +162,20 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
 
         //order.setComment();
 
+        order.generateId();
+
         if (order.isValid()) {
-            orderService.save(order);
+            orderService.save(order).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(AddEditOrderActivity.this, R.string.saveOrderSuccess, Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(AddEditOrderActivity.this, R.string.saveOrderSuccess, Toast.LENGTH_SHORT).show();
+                    finish();
 
-            finish();
+                } else {
+                    System.out.println("\n|\n|\tError -> " + task.getException() + "\n|");
+                    Toast.makeText(AddEditOrderActivity.this, R.string.emptyFields, Toast.LENGTH_SHORT).show();
+                }
+            });
 
         } else Toast.makeText(AddEditOrderActivity.this, R.string.emptyFields, Toast.LENGTH_SHORT).show();
     }

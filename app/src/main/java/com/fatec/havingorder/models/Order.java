@@ -1,5 +1,7 @@
 package com.fatec.havingorder.models;
 
+import com.fatec.havingorder.services.UserService;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -92,10 +94,17 @@ public class Order {
     }
 
     public boolean isValid() {
-        return description != null && !description.isEmpty() &&
+        return id != null &&
+                description != null && !description.isEmpty() &&
                 startDate != null &&
-                status.getClass() == OrderStatus.class && status.isValid() &&
-                client.getClass() == User.class && client.isValid();
+                status != null && status.getClass() == OrderStatus.class && status.isValid() &&
+                client != null && client.getClass() == User.class && client.isValid();
+    }
+
+    public String generateId() {
+        id = UserService.loggedUser.hashCode() + String.valueOf(System.currentTimeMillis());
+
+        return id;
     }
 
     @Override
@@ -130,11 +139,11 @@ public class Order {
 
         dbEntry.put("id", id);
         dbEntry.put("description", description);
-        dbEntry.put("startDate", startDate);
-        dbEntry.put("endDate", endDate);
+        dbEntry.put("startDate", startDate != null ? startDate.toString() : null);
+        dbEntry.put("endDate", endDate != null ? endDate.toString() : null);
         dbEntry.put("price", price);
         dbEntry.put("status", status.toDBEntry());
-        dbEntry.put("client", client);
+        dbEntry.put("client", client.toDBEntry());
         dbEntry.put("comment", comments);
 
         return dbEntry;
