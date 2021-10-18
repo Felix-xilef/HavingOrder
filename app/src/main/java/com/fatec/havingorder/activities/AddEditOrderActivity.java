@@ -23,9 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class AddEditOrderActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
@@ -146,8 +144,8 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
 
     public void saveOrder(View view) {
         try {
-            order.setStartDate(DateTextFormatter.stringToCalendar(startDate.getText().toString()));
-            order.setEndDate(DateTextFormatter.stringToCalendar(endDate.getText().toString()));
+            order.setStartDate(DateTextFormatter.stringToDate(startDate.getText().toString()));
+            order.setEndDate(DateTextFormatter.stringToDate(endDate.getText().toString()));
 
         } catch (ParseException e) {
             Toast.makeText(

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.Order;
 import com.fatec.havingorder.models.User;
+import com.fatec.havingorder.others.DateTextFormatter;
 import com.fatec.havingorder.services.OrderService;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -111,7 +112,7 @@ public class OrdersActivity extends ActivityWithActionBar {
 
             ((TextView) orderEntry.findViewById(R.id.lblOrderDescription)).setText(order.getDescription());
 
-            ((TextView) orderEntry.findViewById(R.id.lblOrderStartDate)).setText(order.getStartDate().toString());
+            ((TextView) orderEntry.findViewById(R.id.lblOrderStartDate)).setText(DateTextFormatter.dateToString(order.getStartDate()));
 
             ((TextView) orderEntry.findViewById(R.id.lblOrderPrice)).setText(String.valueOf(order.getPrice()));
 
@@ -127,7 +128,7 @@ public class OrdersActivity extends ActivityWithActionBar {
     }
 
     public void goToAddEditOrderWithContent(View view) {
-        Intent intent = new Intent(this, AddEditUserActivity.class);
+        Intent intent = new Intent(this, AddEditOrderActivity.class);
         intent.putExtra("orderId", view.getContentDescription());
 
         startActivity(intent);

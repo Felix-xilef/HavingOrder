@@ -5,27 +5,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.User;
 import com.fatec.havingorder.models.UserType;
+import com.fatec.havingorder.services.AuthenticationService;
 import com.fatec.havingorder.services.UserService;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 public class AddEditUserActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
 
     private boolean isEditing;
 
-    private final FirebaseAuth auth = FirebaseAuth.getInstance();
-
     private final UserService userService = new UserService();
+
+    private final AuthenticationService authService = new AuthenticationService();
 
     private User user = new User();
 
@@ -78,28 +75,52 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
-    public void saveUser(View view) {
+    public void save(View view) {
         user.setEmail(email.getText().toString());
         user.setName(name.getText().toString());
         user.setPhone(phone.getText().toString());
         user.setPassword(password.getText().toString());
 
         if (user.isValid() && (isEditing || (user.getPassword() != null && !user.getPassword().isEmpty()))) {
-            userService.save(user);
+            if (!isEditing) {
+                authService.createUser(user.getEmail(), user.getPassword()).addOnCompleteListener(userTask -> {
+                    if (userTask.isSuccessful() && userTask.getResult() != null && userTask.getResult().getUser() != null) {
+                        userTask.getResult().getUser().getIdToken(true).addOnCompleteListener(tokenTask -> {
+                           if (tokenTask.isSuccessful() && tokenTask.getResult() != null) {
+                               user.setUserToken(tokenTask.getResult().getToken());
+                               saveUser(user);
 
-            if (!isEditing) auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword());
+                           } else showErrorFromTask(getString(R.string.saveUserError), tokenTask);
+                        });
 
-            Toast.makeText(AddEditUserActivity.this, R.string.saveUserSuccess, Toast.LENGTH_SHORT).show();
+                    } else showErrorFromTask(getString(R.string.saveUserError), userTask);
+                });
 
-            finish();
+            } else saveUser(user);
 
-        } else Toast.makeText(AddEditUserActivity.this, R.string.emptyFields, Toast.LENGTH_SHORT).show();
+        } else showToast(getString(R.string.emptyFields));
+    }
+
+    public void saveUser(User user) {
+        userService.save(user).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                showToast(getString(R.string.saveUserSuccess));
+                finish();
+
+            } else showErrorFromTask(getString(R.string.getUserError), task);
+        });
     }
 
     public void removeUser(View view) {
-        /*auth.delete
+        authService.removeUser();
 
-        userService.remove(user);*/
+        userService.remove(user).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                showToast(getString(R.string.removeUserSuccess));
+                finish();
+
+            } else showErrorFromTask(getString(R.string.removeUserError), task);
+        });
     }
 
     public void getUser(String userEmail) {
@@ -113,16 +134,20 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
                     phone.setText(user.getPhone());
                     userTypeSpinner.setSelection(user.getType().getId() - 1);
 
-                } else showGetUserError(task);
+                } else showErrorFromTask(getString(R.string.getUserError), task);
 
-            } else showGetUserError(task);
+            } else showErrorFromTask(getString(R.string.getUserError), task);
         });
     }
 
-    private void showGetUserError(Task<DocumentSnapshot> task) {
+    private void showErrorFromTask(String message, Task task) {
+        showToast(message + (task.getException() != null ? task.getException().toString() : ""));
+    }
+
+    private void showToast(String message) {
         Toast.makeText(
                 AddEditUserActivity.this,
-                getText(R.string.getUserError) + (task.getException() != null ? task.getException().toString() : ""),
+                message,
                 Toast.LENGTH_SHORT
         ).show();
     }

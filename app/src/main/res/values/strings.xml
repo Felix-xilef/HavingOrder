@@ -42,4 +42,7 @@
     <string name="getOrderError">Error when getting order(s)</string>
     <string name="saveOrderSuccess">Order successfully saved!</string>
     <string name="saveOrderError">Error when saving order(s)</string>
+    <string name="saveUserError">Error when saving user</string>
+    <string name="removeUserSuccess">User successfully removed!</string>
+    <string name="removeUserError">Error when removing user</string>
 </resources>

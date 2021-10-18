@@ -60,18 +60,24 @@ public class DateTextFormatter {
         }
     }
 
-    public static Calendar stringToCalendar(String stringDate) throws ParseException {
-        return stringToCalendar(stringDate, "dd/MM/yyyy");
+    public static Date stringToDate(String stringDate) throws ParseException {
+        return stringToDate(stringDate, "dd/MM/yyyy");
     }
 
-    public static Calendar stringToCalendar(String stringDate, String format) throws ParseException {
+    public static Date stringToDate(String stringDate, String format) throws ParseException {
         if (stringDate != null && !stringDate.isEmpty() && format != null && !format.isEmpty()) {
-            Calendar calendarDate = Calendar.getInstance();
 
-            calendarDate.setTime((new SimpleDateFormat(format)).parse(stringDate));
-
-            return calendarDate;
+            return (new SimpleDateFormat(format)).parse(stringDate);
 
         } else return null;
+    }
+
+    public static String dateToString(Date date) {
+        return dateToString(date, "dd/MM/yyyy");
+    }
+
+    public static String dateToString(Date date, String format) {
+        if (date != null) return (new SimpleDateFormat(format)).format(date);
+        else return null;
     }
 }

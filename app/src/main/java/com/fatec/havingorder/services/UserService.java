@@ -15,16 +15,6 @@ public class UserService {
 
     private final CollectionReference db = FirebaseFirestore.getInstance().collection("users");
 
-    public static User loggedUser = new User();
-
-    public Task<DocumentSnapshot> setLoggedUser(String email) {
-        return db.document(email).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
-                loggedUser = task.getResult().toObject(User.class);
-            }
-        });
-    }
-
     public Task<QuerySnapshot> getUsers() {
         return db.get();
     }
@@ -42,11 +32,11 @@ public class UserService {
         return db.document(email).get();
     }
 
-    public void save(User user) {
-        db.document(user.getEmail()).set(user.toDBEntry());
+    public Task<Void> save(User user) {
+        return db.document(user.getEmail()).set(user.toDBEntry());
     }
 
-    public void remove(User user) {
-        db.document(user.getEmail()).delete();
+    public Task<Void> remove(User user) {
+        return db.document(user.getEmail()).delete();
     }
 }

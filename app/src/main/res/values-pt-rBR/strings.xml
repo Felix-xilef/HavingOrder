@@ -40,4 +40,7 @@
     <string name="getOrderError">Erro ao recuperar ordem(s):</string>
     <string name="saveOrderSuccess">Ordem salva com sucesso!</string>
     <string name="saveOrderError">Error ao salvar ordem(s)</string>
+    <string name="saveUserError">Error ao salvar usuário(s)</string>
+    <string name="removeUserError">Erro ao remover usuário(s)</string>
+    <string name="removeUserSuccess">Usuário removido com sucesso!</string>
 </resources>

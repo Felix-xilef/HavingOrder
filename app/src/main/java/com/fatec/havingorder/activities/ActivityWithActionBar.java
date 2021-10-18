@@ -11,8 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.fatec.havingorder.R;
-import com.fatec.havingorder.services.UserService;
-import com.google.firebase.auth.FirebaseAuth;
+import com.fatec.havingorder.services.AuthenticationService;
 
 public abstract class ActivityWithActionBar extends AppCompatActivity {
 
@@ -25,7 +24,7 @@ public abstract class ActivityWithActionBar extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
-        if (UserService.loggedUser.getType() == null || UserService.loggedUser.getType().isClient()) {
+        if (AuthenticationService.getLoggedUser().getType() == null || AuthenticationService.getLoggedUser().getType().isClient()) {
             getMenuInflater().inflate(R.menu.nav_items_client, menu);
 
         } else {
@@ -54,7 +53,7 @@ public abstract class ActivityWithActionBar extends AppCompatActivity {
                 return true;
 
             case R.id.btnLogout:
-                FirebaseAuth.getInstance().signOut();
+                (new AuthenticationService()).signOut();
                 Intent intentLogout = new Intent(this, SignInActivity.class);
                 startActivity(intentLogout);
                 finish();

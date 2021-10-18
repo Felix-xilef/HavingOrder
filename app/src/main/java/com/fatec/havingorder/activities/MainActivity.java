@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.fatec.havingorder.R;
-import com.fatec.havingorder.services.UserService;
+import com.fatec.havingorder.services.AuthenticationService;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (auth.getCurrentUser() != null) {
-                    (new UserService()).setLoggedUser(auth.getCurrentUser().getEmail()).addOnCompleteListener(task -> {
+                    AuthenticationService.setLoggedUser(auth.getCurrentUser().getEmail()).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) goToActivity(OrdersActivity.class);
                         else goToActivity(SignInActivity.class);
                     });

@@ -9,11 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.fatec.havingorder.R;
-import com.fatec.havingorder.models.User;
-import com.fatec.havingorder.services.UserService;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.fatec.havingorder.services.AuthenticationService;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -37,9 +33,9 @@ public class SignInActivity extends AppCompatActivity {
             Toast.makeText(SignInActivity.this, R.string.emptyFields, Toast.LENGTH_SHORT).show();
 
         } else {
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            (new AuthenticationService()).signIn(email, password).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
-                    (new UserService()).setLoggedUser(email).addOnCompleteListener(setUserTask -> {
+                    AuthenticationService.setLoggedUser(email).addOnCompleteListener(setUserTask -> {
                         if (setUserTask.isSuccessful()) {
                             Toast.makeText(SignInActivity.this, R.string.signinSuccess, Toast.LENGTH_SHORT).show();
 

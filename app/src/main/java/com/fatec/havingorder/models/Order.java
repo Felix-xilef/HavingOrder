@@ -1,9 +1,9 @@
 package com.fatec.havingorder.models;
 
-import com.fatec.havingorder.services.UserService;
+import com.fatec.havingorder.services.AuthenticationService;
 
 import java.util.Arrays;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -14,9 +14,9 @@ public class Order {
 
     private String description;
 
-    private Calendar startDate;
+    private Date startDate;
 
-    private Calendar endDate;
+    private Date endDate;
 
     private float price;
 
@@ -45,19 +45,19 @@ public class Order {
         this.description = description;
     }
 
-    public Calendar getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Calendar startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Calendar getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Calendar endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -102,7 +102,7 @@ public class Order {
     }
 
     public String generateId() {
-        id = UserService.loggedUser.hashCode() + String.valueOf(System.currentTimeMillis());
+        id = AuthenticationService.getLoggedUser().hashCode() + String.valueOf(System.currentTimeMillis());
 
         return id;
     }
@@ -139,8 +139,8 @@ public class Order {
 
         dbEntry.put("id", id);
         dbEntry.put("description", description);
-        dbEntry.put("startDate", startDate != null ? startDate.toString() : null);
-        dbEntry.put("endDate", endDate != null ? endDate.toString() : null);
+        dbEntry.put("startDate", startDate);
+        dbEntry.put("endDate", endDate);
         dbEntry.put("price", price);
         dbEntry.put("status", status.toDBEntry());
         dbEntry.put("client", client.toDBEntry());

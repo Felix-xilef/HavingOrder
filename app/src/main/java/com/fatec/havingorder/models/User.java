@@ -20,6 +20,8 @@ public class User {
 
     private String password;
 
+    private String userToken;
+
     public User() {
     }
 
@@ -71,6 +73,14 @@ public class User {
         this.password = password;
     }
 
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
+    }
+
     public boolean isValid() {
         return name != null && !name.isEmpty() &&
                 email != null && !email.isEmpty() &&
@@ -109,6 +119,7 @@ public class User {
         dbEntry.put("email", email);
         dbEntry.put("phone", phone);
         dbEntry.put("type", type.toDBEntry());
+        dbEntry.put("userToken", userToken);
 
         return dbEntry;
     }
