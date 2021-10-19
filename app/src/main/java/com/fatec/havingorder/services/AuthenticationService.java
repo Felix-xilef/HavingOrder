@@ -1,11 +1,19 @@
 package com.fatec.havingorder.services;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.fatec.havingorder.models.User;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.File;
 
 public class AuthenticationService {
 
@@ -37,7 +45,7 @@ public class AuthenticationService {
         return auth.createUserWithEmailAndPassword(email, password);
     }
 
-    public void removeUser(String userTokenId) {
-
+    public String getRemoveUrl() {
+        return "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=" + FirebaseApp.getInstance().getPersistenceKey();
     }
 }

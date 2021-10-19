@@ -9,12 +9,21 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.User;
 import com.fatec.havingorder.models.UserType;
 import com.fatec.havingorder.services.AuthenticationService;
 import com.fatec.havingorder.services.UserService;
 import com.google.android.gms.tasks.Task;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AddEditUserActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
 
@@ -112,15 +121,39 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
     }
 
     public void removeUser(View view) {
-        authService.removeUser();
+        JSONObject postData = new JSONObject();
 
-        userService.remove(user).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                showToast(getString(R.string.removeUserSuccess));
-                finish();
+        try {
+            postData.put("idToken", user.getUserToken());
 
-            } else showErrorFromTask(getString(R.string.removeUserError), task);
-        });
+        } catch (JSONException e) {
+            showToast(getString(R.string.removeUserError) + e.getMessage());
+            return;
+        }
+
+        Volley.newRequestQueue(this).add(new JsonObjectRequest(
+                Request.Method.POST,
+                authService.getRemoveUrl(),
+                postData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        userService.remove(user).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                showToast(getString(R.string.removeUserSuccess));
+                                finish();
+
+                            } else showErrorFromTask(getString(R.string.removeUserError), task);
+                        });
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        showToast(getString(R.string.removeUserError) + error.getMessage());
+                    }
+                }
+        ));
     }
 
     public void getUser(String userEmail) {
