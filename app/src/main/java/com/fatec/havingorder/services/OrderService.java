@@ -22,7 +22,7 @@ public class OrderService {
         return db.document(order.getId()).set(order.toDBEntry());
     }
 
-    public void remove(Order order) {
-        db.document(order.getId()).delete();
+    public Task<Void> remove(Order order) {
+        return db.document(order.getId()).delete();
     }
 }

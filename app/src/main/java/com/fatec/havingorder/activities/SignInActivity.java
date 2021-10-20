@@ -6,18 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.User;
 import com.fatec.havingorder.services.AuthenticationService;
+import com.fatec.havingorder.services.ToastService;
 import com.fatec.havingorder.services.UserService;
-import com.google.android.gms.tasks.Task;
 
 public class SignInActivity extends AppCompatActivity {
 
     private EditText txtEmail;
     private EditText txtPassword;
+
+    private final ToastService toastService = new ToastService(SignInActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class SignInActivity extends AppCompatActivity {
         String password = txtPassword.getText().toString();
 
         if (email.isEmpty() || password.isEmpty()) {
-            showToast(getString(R.string.emptyFields));
+            toastService.showToast(getString(R.string.emptyFields));
 
         } else {
             (new UserService()).getUser(email).addOnCompleteListener(getUserTask -> {
@@ -42,15 +43,15 @@ public class SignInActivity extends AppCompatActivity {
                         (new AuthenticationService()).signIn(email, password).addOnCompleteListener(this, signInTask -> {
                             if (signInTask.isSuccessful()) {
                                 AuthenticationService.setLoggedUser(getUserTask.getResult().toObject(User.class));
-                                showToast(getString(R.string.signinSuccess));
+                                toastService.showToast(getString(R.string.signinSuccess));
                                 goToActivity(OrdersActivity.class);
 
-                            } else showToast(getString(R.string.signinFailure));
+                            } else toastService.showToast(getString(R.string.signinFailure));
                         });
 
-                    } else showToast(getString(R.string.signinFailure));
+                    } else toastService.showToast(getString(R.string.signinFailure));
 
-                } else showErrorFromTask(getString(R.string.getUserError), getUserTask);
+                } else toastService.showErrorFromTask(getString(R.string.getUserError), getUserTask);
             });
         }
     }
@@ -59,13 +60,5 @@ public class SignInActivity extends AppCompatActivity {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
         finish();
-    }
-
-    public void showErrorFromTask(String message, Task task) {
-        showToast(message + (task.getException() != null ? task.getException().getMessage() : ""));
-    }
-
-    public void showToast(String message) {
-        Toast.makeText(SignInActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 }

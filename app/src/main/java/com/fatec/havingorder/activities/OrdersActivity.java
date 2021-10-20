@@ -10,19 +10,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.Order;
-import com.fatec.havingorder.models.User;
 import com.fatec.havingorder.others.DateTextFormatter;
 import com.fatec.havingorder.services.OrderService;
+import com.fatec.havingorder.services.ToastService;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersActivity extends ActivityWithActionBar {
+
+    private final ToastService toastService = new ToastService(OrdersActivity.this);
 
     private final OrderService orderService = new OrderService();
 
@@ -37,12 +38,12 @@ public class OrdersActivity extends ActivityWithActionBar {
 
         super.setCustomActionBar();
 
-        orderEntries = (LinearLayout) findViewById(R.id.orderEntries);
+        orderEntries = findViewById(R.id.orderEntries);
 
         getOrders();
 
-        TextInputEditText txtFilter = (TextInputEditText) findViewById(R.id.txtFilterContent);
-        txtFilter.addTextChangedListener(new TextWatcher() {
+        // Setting the filter onChange listener
+        ((TextInputEditText) findViewById(R.id.txtFilterContent)).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -63,7 +64,8 @@ public class OrdersActivity extends ActivityWithActionBar {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.btnOrders) {// It's the same page so do nothing
+        if (item.getItemId() == R.id.btnOrders) {
+            // It's the same page so do nothing
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -77,7 +79,7 @@ public class OrdersActivity extends ActivityWithActionBar {
             if (
                 order.getDescription().toLowerCase().contains(filter) ||
                 String.valueOf(order.getPrice()).contains(filter) ||
-                order.getStartDate().toString().contains(filter)
+                DateTextFormatter.dateToString(order.getStartDate()).contains(filter)
             )
                 filteredOrders.add(order);
         }
@@ -92,13 +94,7 @@ public class OrdersActivity extends ActivityWithActionBar {
 
                 inflateOrders(orders);
 
-            } else {
-                Toast.makeText(
-                        OrdersActivity.this,
-                        getText(R.string.getOrderError) + (task.getException() != null ? task.getException().toString() : ""),
-                        Toast.LENGTH_SHORT
-                ).show();
-            }
+            } else toastService.showErrorFromTask(R.string.getOrderError, task);
         });
     }
 

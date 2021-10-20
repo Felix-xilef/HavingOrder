@@ -27,7 +27,7 @@
     <string name="lblEndDate">Data de finalização</string>
     <string name="datePlaceholder">DD/MM/AAAA</string>
     <string name="lblPrice">Preço</string>
-    <string name="lblComment">Comentário</string>
+    <string name="lblComment">Comentários</string>
     <string name="btnSave">Salvar</string>
     <string name="addUser">Adicionar Usuário</string>
     <string name="editUser">Editar Usuário</string>
@@ -43,4 +43,9 @@
     <string name="saveUserError">Error ao salvar usuário(s)</string>
     <string name="removeUserError">"Erro ao remover usuário(s): "</string>
     <string name="removeUserSuccess">Usuário removido com sucesso!</string>
+    <string name="removeOrderError">"Erro ao remover ordem: "</string>
+    <string name="removeOrderSuccess">Ordem removido com sucesso!</string>
+    <string name="btnAddComment">Adicionar Comentário</string>
+    <string name="btnCancel">Cancelar</string>
+    <string name="commentPlaceHolder">Digite o comentário</string>
 </resources>

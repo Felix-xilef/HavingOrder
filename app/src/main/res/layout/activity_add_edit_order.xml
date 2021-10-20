@@ -198,36 +198,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/lblClient"
                     tools:ignore="SpeakableTextPresentCheck" />
 
-                <TextView
-                    android:id="@+id/lblComment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/lblComment"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/clientsSpinner"
-                    app:layout_constraintTop_toBottomOf="@+id/clientsSpinner" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtComment"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeColor="@color/light_green"
-                    app:hintTextColor="@color/light_green"
-                    app:layout_constraintEnd_toEndOf="@+id/clientsSpinner"
-                    app:layout_constraintStart_toStartOf="@+id/clientsSpinner"
-                    app:layout_constraintTop_toBottomOf="@+id/lblComment">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/lblComment"
-                        android:inputType="textMultiLine"
-                        android:maxLines="3" />
-                </com.google.android.material.textfield.TextInputLayout>
-
                 <Button
                     android:id="@+id/btnSave"
                     style="@style/Widget.MaterialComponents.Button"
@@ -236,9 +206,26 @@
                     android:layout_marginTop="16dp"
                     android:onClick="saveOrder"
                     android:text="@string/btnSave"
-                    app:layout_constraintEnd_toEndOf="@+id/txtComment"
-                    app:layout_constraintStart_toStartOf="@+id/txtComment"
-                    app:layout_constraintTop_toBottomOf="@+id/txtComment" />
+                    app:layout_constraintEnd_toEndOf="@+id/clientsSpinner"
+                    app:layout_constraintStart_toStartOf="@+id/clientsSpinner"
+                    app:layout_constraintTop_toBottomOf="@+id/clientsSpinner" />
+
+                <Button
+                    android:id="@+id/btnComments"
+                    style="@style/TextAppearance.MaterialComponents.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/orange"
+                    android:onClick="goToAddEditOrderCommentsActivity"
+                    android:text="@string/lblComment"
+                    android:textAllCaps="false"
+                    android:textColor="@color/foreground"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/btnSave"
+                    app:layout_constraintStart_toStartOf="@+id/btnSave"
+                    app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 
                 <Button
                     android:id="@+id/btnRemove"
@@ -253,9 +240,9 @@
                     android:textColor="@color/foreground"
                     android:textSize="16sp"
                     android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="@+id/btnSave"
-                    app:layout_constraintStart_toStartOf="@+id/btnSave"
-                    app:layout_constraintTop_toBottomOf="@+id/btnSave" />
+                    app:layout_constraintEnd_toEndOf="@+id/btnComments"
+                    app:layout_constraintStart_toStartOf="@+id/btnComments"
+                    app:layout_constraintTop_toBottomOf="@+id/btnComments" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

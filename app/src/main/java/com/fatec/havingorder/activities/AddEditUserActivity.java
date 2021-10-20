@@ -13,12 +13,15 @@ import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.User;
 import com.fatec.havingorder.models.UserType;
 import com.fatec.havingorder.services.AuthenticationService;
+import com.fatec.havingorder.services.ToastService;
 import com.fatec.havingorder.services.UserService;
 import com.google.android.gms.tasks.Task;
 
 public class AddEditUserActivity extends ActivityWithActionBar implements AdapterView.OnItemSelectedListener {
 
     private boolean isEditing;
+
+    private final ToastService toastService = new ToastService(AddEditUserActivity.this);
 
     private final UserService userService = new UserService();
 
@@ -90,34 +93,34 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
                                user.setUserToken(tokenTask.getResult().getToken());
                                saveUser(user);
 
-                           } else showErrorFromTask(getString(R.string.saveUserError), tokenTask);
+                           } else toastService.showErrorFromTask(getString(R.string.saveUserError), tokenTask);
                         });
 
-                    } else showErrorFromTask(getString(R.string.saveUserError), userTask);
+                    } else toastService.showErrorFromTask(getString(R.string.saveUserError), userTask);
                 });
 
             } else saveUser(user);
 
-        } else showToast(getString(R.string.emptyFields));
+        } else toastService.showToast(getString(R.string.emptyFields));
     }
 
     public void saveUser(User user) {
         userService.save(user).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                showToast(getString(R.string.saveUserSuccess));
+                toastService.showToast(getString(R.string.saveUserSuccess));
                 finish();
 
-            } else showErrorFromTask(getString(R.string.getUserError), task);
+            } else toastService.showErrorFromTask(getString(R.string.getUserError), task);
         });
     }
 
     public void removeUser(View view) {
         userService.remove(user).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                showToast(getString(R.string.removeUserSuccess));
+                toastService.showToast(getString(R.string.removeUserSuccess));
                 finish();
 
-            } else showErrorFromTask(getString(R.string.removeUserError), task);
+            } else toastService.showErrorFromTask(getString(R.string.removeUserError), task);
         });
     }
 
@@ -132,21 +135,9 @@ public class AddEditUserActivity extends ActivityWithActionBar implements Adapte
                     phone.setText(user.getPhone());
                     userTypeSpinner.setSelection(user.getType().getId() - 1);
 
-                } else showErrorFromTask(getString(R.string.getUserError), task);
+                } else toastService.showErrorFromTask(getString(R.string.getUserError), task);
 
-            } else showErrorFromTask(getString(R.string.getUserError), task);
+            } else toastService.showErrorFromTask(getString(R.string.getUserError), task);
         });
-    }
-
-    private void showErrorFromTask(String message, Task task) {
-        showToast(message + (task.getException() != null ? task.getException().toString() : ""));
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(
-                AddEditUserActivity.this,
-                message,
-                Toast.LENGTH_SHORT
-        ).show();
     }
 }
