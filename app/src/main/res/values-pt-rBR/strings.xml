@@ -32,7 +32,7 @@
     <string name="addUser">Adicionar Usuário</string>
     <string name="editUser">Editar Usuário</string>
     <string name="saveUserSuccess">Usuário salvo com sucesso!</string>
-    <string name="getUserError">Erro ao recuperar usuário(s):</string>
+    <string name="getUserError">"Erro ao recuperar usuário(s): "</string>
     <string name="setLoggedUserError">Erro ao definir usuário logado!</string>
     <string name="addOrder">Adicionar Ordem</string>
     <string name="editOrder">Editar Ordem</string>
