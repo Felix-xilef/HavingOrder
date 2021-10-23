@@ -1,8 +1,11 @@
 package com.fatec.havingorder.models;
 
+import com.fatec.havingorder.services.AuthenticationService;
+
 import java.util.Arrays;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -12,9 +15,9 @@ public class Order {
 
     private String description;
 
-    private Calendar startDate;
+    private Date startDate;
 
-    private Calendar endDate;
+    private Date endDate;
 
     private float price;
 
@@ -22,7 +25,7 @@ public class Order {
 
     private User client;
 
-    private String[] comments;
+    private List<Comment> comments;
 
     public Order() {
     }
@@ -43,19 +46,19 @@ public class Order {
         this.description = description;
     }
 
-    public Calendar getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Calendar startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Calendar getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Calendar endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -83,22 +86,24 @@ public class Order {
         this.client = client;
     }
 
-    public String[] getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComment(String[] comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
     public boolean isValid() {
-        return id != null && !id.isEmpty() &&
+        return id != null &&
                 description != null && !description.isEmpty() &&
                 startDate != null &&
-                endDate != null &&
-                status.getClass() == OrderStatus.class && status.isValid() &&
-                client.getClass() == User.class && client.isValid() &&
-                comments != null;
+                status != null && status.getClass() == OrderStatus.class && status.isValid() &&
+                client != null && client.getClass() == User.class && client.isValid();
+    }
+
+    public void generateId() {
+        id = AuthenticationService.getLoggedUser().hashCode() + String.valueOf(System.currentTimeMillis());
     }
 
     @Override
@@ -124,7 +129,7 @@ public class Order {
                 ", price=" + price +
                 ", status=" + status +
                 ", client=" + client +
-                ", comments=" + Arrays.toString(comments) +
+                ", comments=" + comments +
                 '}';
     }
 
@@ -137,8 +142,8 @@ public class Order {
         dbEntry.put("endDate", endDate);
         dbEntry.put("price", price);
         dbEntry.put("status", status.toDBEntry());
-        dbEntry.put("client", client);
-        dbEntry.put("comment", comments);
+        dbEntry.put("client", client.toDBEntry());
+        dbEntry.put("comments", comments);
 
         return dbEntry;
     }

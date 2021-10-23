@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.fatec.havingorder.R;
+import com.fatec.havingorder.models.User;
+import com.fatec.havingorder.services.AuthenticationService;
 import com.fatec.havingorder.services.UserService;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -26,9 +28,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (auth.getCurrentUser() != null) {
-                    (new UserService()).setLoggedUser(auth.getCurrentUser().getEmail()).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) goToActivity(OrdersActivity.class);
-                        else goToActivity(SignInActivity.class);
+                    (new UserService()).getUser(auth.getCurrentUser().getEmail()).addOnCompleteListener(getUserTask -> {
+                        if (getUserTask.isSuccessful() && getUserTask.getResult() != null && getUserTask.getResult().exists()) {
+                            AuthenticationService.setLoggedUser(getUserTask.getResult().toObject(User.class));
+                            goToActivity(OrdersActivity.class);
+
+                        } else {
+                            auth.signOut();
+                            goToActivity(SignInActivity.class);
+                        }
                     });
 
                 } else goToActivity(SignInActivity.class);

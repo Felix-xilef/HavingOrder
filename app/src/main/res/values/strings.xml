@@ -29,7 +29,7 @@
     <string name="datePlaceholder">DD/MM/YYYY</string>
     <string name="lblPrice">Price</string>
     <string name="lblOrderStatus" translatable="false">Status</string>
-    <string name="lblComment">Comment</string>
+    <string name="lblComment">Comments</string>
     <string name="btnSave">Save</string>
     <string name="addUser">Add User</string>
     <string name="editUser">Edit User</string>
@@ -39,4 +39,16 @@
     <string name="addOrder">Add Order</string>
     <string name="editOrder">Edit Order</string>
     <string name="remove">Remove</string>
+    <string name="getOrderError">Error when getting order(s)</string>
+    <string name="saveOrderSuccess">Order successfully saved!</string>
+    <string name="saveOrderError">Error when saving order(s)</string>
+    <string name="saveUserError">Error when saving user</string>
+    <string name="removeUserSuccess">User successfully removed!</string>
+    <string name="removeUserError">"Error when removing user: "</string>
+    <string name="removeOrderError">"Error when removing order: "</string>
+    <string name="removeOrderSuccess">Order successfully removed!</string>
+    <string name="btnAddComment">Add Comment</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="commentPlaceHolder">Type the comment</string>
+    <string name="date">Date:</string>
 </resources>

@@ -8,12 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.User;
+import com.fatec.havingorder.services.ToastService;
 import com.fatec.havingorder.services.UserService;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsersActivity extends ActivityWithActionBar {
+
+    private final ToastService toastService = new ToastService(UsersActivity.this);
 
     private final UserService userService = new UserService();
 
@@ -35,12 +37,12 @@ public class UsersActivity extends ActivityWithActionBar {
 
         super.setCustomActionBar();
 
-        userEntries = (LinearLayout) findViewById(R.id.userEntries);
+        userEntries = findViewById(R.id.userEntries);
 
         getUsers();
 
-        TextInputEditText txtFilter = (TextInputEditText) findViewById(R.id.txtFilterContent);
-        txtFilter.addTextChangedListener(new TextWatcher() {
+        // Setting the filter onChange listener
+        ((TextInputEditText) findViewById(R.id.txtFilterContent)).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -87,13 +89,7 @@ public class UsersActivity extends ActivityWithActionBar {
 
                inflateUsers(users);
 
-           } else {
-               Toast.makeText(
-                       UsersActivity.this,
-                       getText(R.string.getUserError) + (task.getException() != null ? task.getException().toString() : ""),
-                       Toast.LENGTH_SHORT
-               ).show();
-           }
+           } else toastService.showErrorFromTask(R.string.getUserError, task);
        });
     }
 
