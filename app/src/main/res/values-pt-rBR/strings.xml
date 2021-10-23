@@ -48,4 +48,5 @@
     <string name="btnAddComment">Adicionar Comentário</string>
     <string name="btnCancel">Cancelar</string>
     <string name="commentPlaceHolder">Digite o comentário</string>
+    <string name="date">"Data: "</string>
 </resources>

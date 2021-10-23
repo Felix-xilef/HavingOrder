@@ -5,6 +5,7 @@ import com.fatec.havingorder.services.AuthenticationService;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -24,7 +25,7 @@ public class Order {
 
     private User client;
 
-    private String[] comments;
+    private List<Comment> comments;
 
     public Order() {
     }
@@ -85,11 +86,11 @@ public class Order {
         this.client = client;
     }
 
-    public String[] getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComment(String[] comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
@@ -101,10 +102,8 @@ public class Order {
                 client != null && client.getClass() == User.class && client.isValid();
     }
 
-    public String generateId() {
+    public void generateId() {
         id = AuthenticationService.getLoggedUser().hashCode() + String.valueOf(System.currentTimeMillis());
-
-        return id;
     }
 
     @Override
@@ -130,7 +129,7 @@ public class Order {
                 ", price=" + price +
                 ", status=" + status +
                 ", client=" + client +
-                ", comments=" + Arrays.toString(comments) +
+                ", comments=" + comments +
                 '}';
     }
 
@@ -144,7 +143,7 @@ public class Order {
         dbEntry.put("price", price);
         dbEntry.put("status", status.toDBEntry());
         dbEntry.put("client", client.toDBEntry());
-        dbEntry.put("comment", comments);
+        dbEntry.put("comments", comments);
 
         return dbEntry;
     }

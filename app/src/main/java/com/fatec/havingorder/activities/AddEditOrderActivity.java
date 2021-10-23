@@ -162,8 +162,6 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
         order.setDescription(description.getText().toString());
         order.setPrice(Float.parseFloat(price.getText().toString()));
 
-        //order.setComment();
-
         if (!isEditing) order.generateId();
 
         if (order.isValid()) {
@@ -201,8 +199,6 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
                     price.setText(String.valueOf(order.getPrice()));
                     statusSpinner.setSelection(order.getStatus().getId() - 1);
                     clientSpinner.setSelection(clients.indexOf(order.getClient()));
-
-                    // Set comments
 
                 } else toastService.showErrorFromTask(R.string.getOrderError, task);
 
