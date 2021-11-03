@@ -15,13 +15,14 @@ import com.fatec.havingorder.models.Order;
 import com.fatec.havingorder.models.OrderStatus;
 import com.fatec.havingorder.models.User;
 import com.fatec.havingorder.models.UserType;
-import com.fatec.havingorder.others.DateTextFormatter;
+import com.fatec.havingorder.Utils.DateTextFormatter;
 import com.fatec.havingorder.services.OrderService;
 import com.fatec.havingorder.services.ToastService;
 import com.fatec.havingorder.services.UserService;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,11 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
     private Spinner statusSpinner;
     private Spinner clientSpinner;
 
-    private static final String[] statusItems = {"Aberto", "Finalizado", "Cancelado"};
+    private final List<String> statusItems = Arrays.asList(
+            OrderStatus.OPEN_DESCRIPTION,
+            OrderStatus.CLOSED_DESCRIPTION,
+            OrderStatus.CANCELED_DESCRIPTION
+    );
 
     private static List<String> clientNames = new ArrayList<>();
     private List<User> clients = new ArrayList<>();

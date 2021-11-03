@@ -14,8 +14,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,16 +55,60 @@
                 android:inputType="textFilter" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/lblOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/lblOrderStatus"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/txtFilter"
+            app:layout_constraintTop_toBottomOf="@+id/txtFilter" />
+
+        <Spinner
+            android:id="@+id/statusSpinner"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:elevation="4dp"
+            android:foregroundTint="@color/foreground_dark"
+            app:layout_constraintEnd_toEndOf="@+id/txtFilter"
+            app:layout_constraintStart_toStartOf="@+id/txtFilter"
+            app:layout_constraintTop_toBottomOf="@+id/lblOrderStatus"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/lblClient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/userTypeClient"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/statusSpinner"
+            app:layout_constraintTop_toBottomOf="@+id/statusSpinner" />
+
+        <Spinner
+            android:id="@+id/clientsSpinner"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:elevation="4dp"
+            android:foregroundTint="@color/foreground_dark"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/statusSpinner"
+            app:layout_constraintStart_toStartOf="@+id/statusSpinner"
+            app:layout_constraintTop_toBottomOf="@+id/lblClient"
+            tools:ignore="SpeakableTextPresentCheck" />
+
         <ScrollView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="-16dp"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="-16dp"
-            app:layout_constraintEnd_toEndOf="@+id/txtFilter"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/txtFilter"
-            app:layout_constraintTop_toBottomOf="@+id/txtFilter">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clientsSpinner">
 
             <LinearLayout
                 android:id="@+id/orderEntries"
@@ -69,7 +117,7 @@
                 android:divider="@color/foreground_dark"
                 android:dividerPadding="10dp"
                 android:orientation="vertical"
-                android:showDividers="middle"/>
+                android:showDividers="middle" />
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
