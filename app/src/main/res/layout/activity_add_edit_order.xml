@@ -183,6 +183,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/userTypeClient"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@+id/statusSpinner"
                     app:layout_constraintTop_toBottomOf="@+id/statusSpinner" />
 
@@ -193,6 +194,7 @@
                     android:layout_marginTop="8dp"
                     android:elevation="4dp"
                     android:foregroundTint="@color/foreground_dark"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/statusSpinner"
                     app:layout_constraintStart_toStartOf="@+id/statusSpinner"
                     app:layout_constraintTop_toBottomOf="@+id/lblClient"
@@ -206,8 +208,8 @@
                     android:layout_marginTop="16dp"
                     android:onClick="saveOrder"
                     android:text="@string/btnSave"
-                    app:layout_constraintEnd_toEndOf="@+id/clientsSpinner"
-                    app:layout_constraintStart_toStartOf="@+id/clientsSpinner"
+                    app:layout_constraintEnd_toEndOf="@+id/txtPrice"
+                    app:layout_constraintStart_toStartOf="@+id/txtPrice"
                     app:layout_constraintTop_toBottomOf="@+id/clientsSpinner" />
 
                 <Button

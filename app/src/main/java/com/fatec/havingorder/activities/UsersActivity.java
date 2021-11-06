@@ -70,6 +70,10 @@ public class UsersActivity extends ActivityWithActionBar {
         return super.onOptionsItemSelected(item);
     }
 
+    public void reload(View view) {
+        getUsers();
+    }
+
     public void filterUsers(String filter) {
         filter = filter.toLowerCase();
         List<User> filteredUsers = new ArrayList<>();

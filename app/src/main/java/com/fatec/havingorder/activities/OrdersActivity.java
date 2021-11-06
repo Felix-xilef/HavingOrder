@@ -75,8 +75,10 @@ public class OrdersActivity extends ActivityWithActionBar implements AdapterView
         spinnerService.setSpinnerUp(statusSpinner, statusItems, this);
 
         if (AuthenticationService.getLoggedUser().getType() == null || AuthenticationService.getLoggedUser().getType().isClient()) {
+            clients = Collections.singletonList(AuthenticationService.getLoggedUser());
             clientNames = Collections.singletonList(AuthenticationService.getLoggedUser().getName());
             spinnerService.setSpinnerUp(clientSpinner, clientNames, this);
+            getOrders(AuthenticationService.getLoggedUser());
 
         } else {
             findViewById(R.id.lblClient).setVisibility(View.VISIBLE);
@@ -138,6 +140,12 @@ public class OrdersActivity extends ActivityWithActionBar implements AdapterView
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+
+    public void reload(View view) {
+        statusSpinner.setSelection(0);
+        txtFilterContent.setText("");
+        getOrders(clients.get(clientSpinner.getSelectedItemPosition()));
     }
 
     public void filterOrders() {

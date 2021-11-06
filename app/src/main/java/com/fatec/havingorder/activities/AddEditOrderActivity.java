@@ -16,13 +16,16 @@ import com.fatec.havingorder.models.OrderStatus;
 import com.fatec.havingorder.models.User;
 import com.fatec.havingorder.models.UserType;
 import com.fatec.havingorder.Utils.DateTextFormatter;
+import com.fatec.havingorder.services.AuthenticationService;
 import com.fatec.havingorder.services.OrderService;
+import com.fatec.havingorder.services.SpinnerService;
 import com.fatec.havingorder.services.ToastService;
 import com.fatec.havingorder.services.UserService;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +36,8 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
     private final ToastService toastService = new ToastService(AddEditOrderActivity.this);
 
     private final OrderService orderService = new OrderService();
+
+    private final SpinnerService spinnerService = new SpinnerService();
 
     private Order order = new Order();
 
@@ -69,41 +74,34 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
         clientSpinner = findViewById(R.id.clientsSpinner);
 
         // Setting statusSpinner up
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(AddEditOrderActivity.this, android.R.layout.simple_spinner_item, statusItems);
-        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        statusSpinner.setAdapter(statusAdapter);
-        statusSpinner.setOnItemSelectedListener(this);
+        spinnerService.setSpinnerUp(statusSpinner, statusItems, this);
 
-        (new UserService()).getUsers(new UserType(2)).addOnCompleteListener(task -> {
+        if (AuthenticationService.getLoggedUser().getType() == null || AuthenticationService.getLoggedUser().getType().isClient()) {
+            clients = Collections.singletonList(AuthenticationService.getLoggedUser());
+            clientNames = Collections.singletonList(AuthenticationService.getLoggedUser().getName());
 
-            // Setting clientSpinner up
-            if (task.isSuccessful() && task.getResult() != null) {
-                clients = task.getResult().toObjects(User.class);
+            setActivityUp();
 
-                clientNames.clear();
-                for (User client : clients) clientNames.add(client.getName());
+            if (!isEditing) order.setClient(AuthenticationService.getLoggedUser());
 
-                ArrayAdapter<String> clientsAdapter = new ArrayAdapter<>(AddEditOrderActivity.this, android.R.layout.simple_spinner_item, clientNames);
-                clientsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                clientSpinner.setAdapter(clientsAdapter);
-                clientSpinner.setOnItemSelectedListener(this);
+        } else {
+            findViewById(R.id.lblClient).setVisibility(View.VISIBLE);
+            clientSpinner.setVisibility(View.VISIBLE);
 
-            } else toastService.showErrorFromTask(R.string.getUserError, task);
+            (new UserService()).getUsers(new UserType(2)).addOnCompleteListener(task -> {
 
-            // Verifying scope
-            Intent intent = getIntent();
-            String orderId = intent.getStringExtra("orderId");
+                // Setting clientSpinner up
+                if (task.isSuccessful() && task.getResult() != null) {
+                    clients = task.getResult().toObjects(User.class);
 
-            isEditing = orderId != null && !orderId.isEmpty();
+                    clientNames.clear();
+                    for (User client : clients) clientNames.add(client.getName());
 
-            if (isEditing) {
-                getOrder(orderId);
-                super.setActionBarTitle(R.string.editOrder);
-                findViewById(R.id.btnRemove).setVisibility(View.VISIBLE);
-                findViewById(R.id.btnComments).setVisibility(View.VISIBLE);
+                    setActivityUp();
 
-            } else super.setActionBarTitle(R.string.addOrder);
-        });
+                } else toastService.showErrorFromTask(R.string.getUserError, task);
+            });
+        }
 
         startDate.addTextChangedListener(new TextWatcher() {
             @Override
@@ -138,6 +136,24 @@ public class AddEditOrderActivity extends ActivityWithActionBar implements Adapt
 
             }
         });
+    }
+
+    public void setActivityUp() {
+        spinnerService.setSpinnerUp(clientSpinner, clientNames, this);
+
+        // Verifying scope
+        Intent intent = getIntent();
+        String orderId = intent.getStringExtra("orderId");
+
+        isEditing = orderId != null && !orderId.isEmpty();
+
+        if (isEditing) {
+            getOrder(orderId);
+            super.setActionBarTitle(R.string.editOrder);
+            findViewById(R.id.btnRemove).setVisibility(View.VISIBLE);
+            findViewById(R.id.btnComments).setVisibility(View.VISIBLE);
+
+        } else super.setActionBarTitle(R.string.addOrder);
     }
 
     @Override
