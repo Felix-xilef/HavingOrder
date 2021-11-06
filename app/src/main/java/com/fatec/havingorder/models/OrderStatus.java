@@ -13,8 +13,8 @@ public class OrderStatus {
     private int id;
 
     public static String OPEN_DESCRIPTION = "Aberto";
-    public static String CLOSED_DESCRIPTION = "Aberto";
-    public static String CANCELED_DESCRIPTION = "Aberto";
+    public static String CLOSED_DESCRIPTION = "Finalizado";
+    public static String CANCELED_DESCRIPTION = "Cancelado";
 
     private String description;
 

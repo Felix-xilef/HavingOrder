@@ -49,4 +49,5 @@
     <string name="btnCancel">Cancelar</string>
     <string name="commentPlaceHolder">Digite o comentário</string>
     <string name="date">"Data: "</string>
+    <string name="orders">Ordens de serviço</string>
 </resources>
