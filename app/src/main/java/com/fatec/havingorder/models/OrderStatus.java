@@ -6,7 +6,15 @@ import java.util.Objects;
 
 public class OrderStatus {
 
+    public static int OPEN_ID = 1;
+    public static int CLOSE_ID = 2;
+    public static int CANCELED_ID = 3;
+
     private int id;
+
+    public static String OPEN_DESCRIPTION = "Aberto";
+    public static String CLOSED_DESCRIPTION = "Finalizado";
+    public static String CANCELED_DESCRIPTION = "Cancelado";
 
     private String description;
 
@@ -18,9 +26,9 @@ public class OrderStatus {
 
         this.id = id;
 
-        if (id == 1) description = "Aberto";
-        else if (id == 2) description = "Finalizado";
-        else description = "Cancelado";
+        if (id == OPEN_ID) description = OPEN_DESCRIPTION;
+        else if (id == CLOSE_ID) description = CLOSED_DESCRIPTION;
+        else if (id == CANCELED_ID) description = CANCELED_DESCRIPTION;
     }
 
     public int getId() {

@@ -1,27 +1,20 @@
 package com.fatec.havingorder.activities;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.fatec.havingorder.R;
 import com.fatec.havingorder.models.Comment;
 import com.fatec.havingorder.models.Order;
-import com.fatec.havingorder.others.DateTextFormatter;
+import com.fatec.havingorder.Utils.DateTextFormatter;
 import com.fatec.havingorder.services.OrderService;
 import com.fatec.havingorder.services.ToastService;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AddEditOrderCommentsActivity extends ActivityWithActionBar {
 

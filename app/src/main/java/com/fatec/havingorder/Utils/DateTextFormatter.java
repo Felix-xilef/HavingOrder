@@ -1,4 +1,4 @@
-package com.fatec.havingorder.others;
+package com.fatec.havingorder.Utils;
 
 import android.annotation.SuppressLint;
 import android.widget.EditText;

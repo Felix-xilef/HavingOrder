@@ -65,7 +65,7 @@ public abstract class ActivityWithActionBar extends AppCompatActivity {
     }
 
     protected void setCustomActionBar() {
-        Toolbar appToolBar = (Toolbar) findViewById(R.id.appToolbar);
+        Toolbar appToolBar = findViewById(R.id.appToolbar);
         setSupportActionBar(appToolBar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }

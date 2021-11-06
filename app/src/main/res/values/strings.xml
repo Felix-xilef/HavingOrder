@@ -51,4 +51,6 @@
     <string name="btnCancel">Cancel</string>
     <string name="commentPlaceHolder">Type the comment</string>
     <string name="date">Date:</string>
+    <string name="orders">Service orders</string>
+    <string name="reload">Reload</string>
 </resources>
