@@ -202,6 +202,9 @@ public class OrdersActivity extends ActivityWithActionBar implements AdapterView
 
             orderEntries.addView(orderEntry);
         }
+
+        String amount = orders.size() + getString(R.string.orderAmount);
+        ((TextView) findViewById(R.id.txtAmount)).setText(amount);
     }
 
     public void goToAddEditOrderWithContent(View view) {
