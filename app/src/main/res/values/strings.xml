@@ -53,5 +53,5 @@
     <string name="date">Date:</string>
     <string name="orders">Service orders</string>
     <string name="reload">Reload</string>
-    <string name="orderAmount">order(s) found</string>
+    <string name="orderAmount">Total: R$</string>
 </resources>

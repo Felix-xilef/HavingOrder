@@ -180,9 +180,12 @@ public class OrdersActivity extends ActivityWithActionBar implements AdapterView
     }
 
     public void inflateOrders(List<Order> orders) {
+        float totalAmount = 0f;
         orderEntries.removeAllViews();
 
         for (Order order : orders) {
+            totalAmount += order.getPrice();
+
             View orderEntry = getLayoutInflater().inflate(R.layout.order_entry, orderEntries, false);
 
             orderEntry.findViewById(R.id.orderEntry).setContentDescription(order.getId());
@@ -203,7 +206,7 @@ public class OrdersActivity extends ActivityWithActionBar implements AdapterView
             orderEntries.addView(orderEntry);
         }
 
-        String amount = orders.size() + getString(R.string.orderAmount);
+        String amount = getString(R.string.orderAmount) + totalAmount;
         ((TextView) findViewById(R.id.txtAmount)).setText(amount);
     }
 
